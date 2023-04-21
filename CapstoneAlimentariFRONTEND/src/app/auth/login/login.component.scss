@@ -1,0 +1,72 @@
+.loginBox {
+    background: rgba(58, 58, 58, 0.7);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+.loginBox .dipendenteBox {
+    position: relative;
+}
+
+.loginBox .dipendenteBox input {
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: rgb(222, 222, 222);
+}
+
+.loginBox .dipendenteBox label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: 0.5s;
+    font-size: 16px;
+}
+
+.loginBox .dipendenteBox input:focus ~ label,
+.loginBox .dipendenteBox input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+    background: transparent;
+}
+
+.loginBox form button {
+    position: relative;
+    display: inline-block;
+    color: #03e9f4;
+    font-size: 16px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    font-weight: bold;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 10%;
+}
+
+.loginBox form button:hover {
+    background-color: #03e9f4;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 10px #03e9f4,
+    0 0 15px #03e9f4,
+    0 0 20px #03e9f4;
+    color: black;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.loginBox form a {
+    position: relative;
+    display: inline-block;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#btnLogin:hover {
+    border: 2px solid black;
+}

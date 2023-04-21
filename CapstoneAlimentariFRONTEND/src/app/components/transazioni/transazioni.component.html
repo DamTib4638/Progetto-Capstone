@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div *ngIf="authServ.isDipLoggedIn() && (ruolo.includes('DIRETTORE') || ruolo.includes('CASSIERE'))"
+            class="col-3 mt-4">
+            <button title="Emetti nuova Transazione" class="btn btn-success rounded-5 mb-5" (click)="nuovaTransazione()"><i class="bi bi-plus-lg"><span>Genera Transazione</span></i></button>
+        </div>
+    </div>
+    <div class="row fw-bold">
+        <div class="d-flex align-items-center">
+            <div class="col-1">
+                <h6>ID</h6>
+            </div>
+            <div class="col-2">
+                <h6>DATA EMISSIONE</h6>
+            </div>
+            <div class="col-2">
+                <h6>DATA PAGAMENTO</h6>
+            </div>
+            <div class="col-2">
+                <h6>CASSA</h6>
+            </div>
+            <div class="col-3">
+                <h6>DIPENDENTE</h6>
+            </div>
+            <div class="col-2">
+                <h6>AZIONI</h6>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let tran of listaTransazioni" class="row align-items-center border border-start-0 border-end-0">
+        <div class="d-flex align-items-center py-2">
+            <div class="col-1" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <h6>{{tran.idTransazione}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <h6>{{tran.dataEmissioneTransazione}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <h6>{{tran.dataPagamentoTransazione}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <h6>{{tran.cassa.numeroCassa}}</h6>
+            </div>
+            <div class="col-3" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <h6>{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - {{tran.dipendente.mansioni[0].tipoMansione}}</h6>
+            </div>
+            <div *ngIf="(!confermaCanc && !confermaPagam) || (codiceVerificaCanc != tran.idTransazione && codiceVerificaPagam != tran.idTransazione)" class="col-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                <button id="btn_01" title="Dettaglio Transazione" class="btn btn-info me-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <button *ngIf="tran.dataPagamentoTransazione == null" id="btn_02" title="Paga Transazione" class="btn btn-success me-2" (click)="pagaTransazione(tran.idTransazione)">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button *ngIf="tran.dataPagamentoTransazione == null" id="btn_03" title="Elimina Transazione" class="btn btn-danger me-2" (click)="cancellaTransazione(tran.idTransazione)">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </div>
+            <div *ngIf="confermaCanc && (codiceVerificaCanc == tran.idTransazione)" class="col-2">
+                <button title="Conferma eliminazione" class="btn btn-success me-2" (click)="confermaCancellazione(tran.idTransazione)">Cancella</button>
+                <button title="Annulla eliminazione" class="btn btn-danger" (click)="annullaCancellazione()">Annulla</button>
+            </div>
+            <div *ngIf="confermaPagam && (codiceVerificaPagam == tran.idTransazione)" class="col-2">
+                <button title="Conferma pagamento" class="btn btn-success me-2" (click)="confermaPagamento(tran.idTransazione)">Paga</button>
+                <button title="Annulla pagamento" class="btn btn-danger" (click)="annullaPagamento()">Annulla</button>
+            </div>
+        </div>
+    </div>
+</div>

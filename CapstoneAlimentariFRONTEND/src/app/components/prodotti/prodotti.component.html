@@ -1,0 +1,56 @@
+<h1 class="text-center my-5">Lista Prodotti</h1>
+<div class="container">
+    <header class="card-header">
+        <div class="row my-4 justify-content-around align-items-center">
+            <!-- <div class="col-lg-4 col-md-6 me-auto">
+                <input name="testo" id="testo" type="text" placeholder="Da Implementare..." (keyup)="cercaProd()" class="form-control" [(ngModel)]="testo">
+            </div> -->
+            <div *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" class="col-lg-2 col-6 col-md-3">
+                <button title="Inserisci Nuovo Prodotto" class="btn btn-success rounded-5 w-100" (click)="nuovoProdotto()">
+                    <i class="bi bi-plus-lg"><span>Nuovo Prodotto</span></i>
+                </button>
+            </div>
+            <!-- <div class="col-lg-2 col-6 col-md-3">
+                <select class="form-select">
+                    <option>Da Implementare</option>
+                    <option>Prezzo Basso</option>
+                    <option>Più Acquistati</option>
+                </select>
+            </div> -->
+        </div>
+    </header>
+</div>
+<div id="listaProdotti" class="row m-0 text-center">
+    <div class="col-12 col-md-6 col-lg-3 card border-0 bg-transparent p-4 mb-5" *ngFor="let prod of listaProdotti">
+        <div class="carta card-body p-0 pb-3" [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]">
+            <img *ngIf="prod.tipoProdotto === 'FRUTTA' && prod.categoriaProdotto === 'FRUTTA_VERDURA'" src="../../../assets/images/frutta.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'VERDURA' && prod.categoriaProdotto === 'FRUTTA_VERDURA'" src="../../../assets/images/verdura.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'CARNE' && prod.categoriaProdotto === 'CARNE_PESCE'" src="../../../assets/images/carne.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'PESCE' && prod.categoriaProdotto === 'CARNE_PESCE'" src="../../../assets/images/pesce.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'LATTE' && prod.categoriaProdotto === 'LATTE_FORMAGGIO'" src="../../../assets/images/latte.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'FORMAGGIO' && prod.categoriaProdotto === 'LATTE_FORMAGGIO'" src="../../../assets/images/formaggio.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.tipoProdotto === 'TEMPO_LIBERO' && prod.categoriaProdotto === 'HOBBY'" src="../../../assets/images/hobby.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="(prod.tipoProdotto === 'CIBO_ANIMALI' || prod.tipoProdotto === 'PULIZIA_ANIMALI' || prod.tipoProdotto === 'ACCESSORI_ANIMALI') && prod.categoriaProdotto === 'ANIMALI'" src="../../../assets/images/animali.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="(prod.tipoProdotto === 'ACCESSORI_BIMBO' || prod.tipoProdotto === 'INTIMO_BIMBO' || prod.tipoProdotto === 'CIBO_BIMBO') && prod.categoriaProdotto === 'SPECIAL'" src="../../../assets/images/bimbo.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'BEVANDA'" src="../../../assets/images/bevande.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'CURA_CASA' && prod.tipoProdotto === 'PULIZIA_CASA'" src="../../../assets/images/casalinghi.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'SURGELATO' && prod.tipoProdotto === 'SNACK_DOLCE'" src="../../../assets/images/gelati.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'SURGELATO' && (prod.tipoProdotto === 'SNACK_SALATO' || prod.tipoProdotto === 'PIZZA' || prod.tipoProdotto === 'VERDURA')" src="../../../assets/images/surgelati.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'CURA_PERSONALE' && (prod.tipoProdotto === 'INTIMO_ADULTO' || prod.tipoProdotto === 'DENTIFRICIO' || prod.tipoProdotto === 'BAGNOSCHIUMA' || prod.tipoProdotto === 'SHAMPOO' || prod.tipoProdotto === 'CARTA')" src="../../../assets/images/igiene_personale.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'COLAZIONE' && prod.tipoProdotto === 'SNACK_DOLCE'" src="../../../assets/images/dolci.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'IN_SCATOLA'" src="../../../assets/images/scatola.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'FRESCO'" src="../../../assets/images/fresco.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <img *ngIf="prod.categoriaProdotto === 'FORNO_SNACK'" src="../../../assets/images/forno.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
+            <h6 class="card-title">{{prod.nome}}</h6>
+            <p class="card-text">{{prod.marca}}</p>
+            <!-- <p class="card-text">{{prod.ingredienti}}</p> -->
+            <p class="card-text" *ngIf="prod.qtaDisponibile">{{prod.dataScadenza | date:'dd/MM/yyyy'}} - Disponibilità: {{prod.qtaDisponibile}} pezzi</p>
+            <p class="card-text" *ngIf="prod.pesoDisponibile">{{prod.dataScadenza | date:'dd/MM/yyyy'}} - Disponibilità: {{prod.pesoDisponibile | number: '1.1-1'}} Kg</p>
+            <p class="card-text" *ngIf="prod.qtaDisponibile">{{prod.prezzoVenditaUnitario | currency: '€'}} / pezzo</p>
+            <p class="card-text" *ngIf="prod.pesoDisponibile">{{prod.prezzoVenditaUnitario | currency: '€'}} / Kg</p>
+            <!-- <input type="number" class="col-4" name="pezzi" id="pezzi"> -->
+            <button [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]" class="btn btn-info text-white col-4"><i class="bi bi-card-heading"></i></button>
+            <button *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" [routerLink]="['/modifica_prodotto/' + prod.idProdotto]" class="btn btn-warning text-dark col-4 offset-1"><i class="bi bi-pencil-square"></i></button>
+        </div>
+    </div>
+</div>

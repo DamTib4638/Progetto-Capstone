@@ -1,0 +1,28 @@
+<div class="d-flex flex-column align-items-center">
+        <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Prodotto</h1>
+        <button class="btn btn-info text-white ms-5 mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
+        <div *ngIf="prod" class="card w-50 m-3 contenitore_card">
+            <div class="card-header fw-bolder bg-dark text-warning">Codice Prodotto {{ prod.idProdotto}}</div>
+            <div class="card-body">
+                <h4 class="card-text text-center text-info">Nome prodotto: {{ prod.nome }} - Marca: {{ prod.marca }}</h4>
+                <p class="card-text text-center"><i class="fw-bold">Descrizione: {{ prod.descrizione }}</i></p>
+                <p class="card-text text-center"><i class="fw-bold">Ingredienti: {{ prod.ingredienti }}</i></p>
+                <p class="card-text text-center">Categoria Prodotto: {{ prod.categoriaProdotto }}. Tipo Prodotto: {{ prod.tipoProdotto }}</p>
+                <h6 class="card-text text-center" *ngIf="prod.qtaDisponibile">Data di Scadenza: {{ prod.dataScadenza | date:'dd/MM/yyyy' }} - Pezzi Disponibili: {{ prod.qtaDisponibile }}</h6>
+                <h6 class="card-text text-center" *ngIf="prod.pesoDisponibile">Data di Scadenza: {{ prod.dataScadenza | date:'dd/MM/yyyy' }} - Chilogrammi Disponibili: {{ prod.pesoDisponibile }}</h6>
+                <p class="card-text text-center" *ngIf="prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{ prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: SI. Valore sconto: {{ prod.prezzoAcquistoUnitario }} - Prezzo Vendita al Pubblico: {{ prod.prezzoVenditaUnitario }}</p>
+                <p class="card-text text-center" *ngIf="!prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{ prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: NO - Prezzo Vendita al Pubblico: {{ prod.prezzoVenditaUnitario }}</p>
+            </div>
+        </div>
+</div>
+
+
+
+<!-- tipoProdotto: '',
+        categoriaProdotto: '',
+        dataScadenza: new Date(9999, 12, 31),
+        qtaDisponibile: 0,
+        pesoDisponibile: 0,
+        prezzoAcquistoUnitario: 0,
+        prezzoVenditaUnitario: 0,
+        percentualeOfferta: 0, -->

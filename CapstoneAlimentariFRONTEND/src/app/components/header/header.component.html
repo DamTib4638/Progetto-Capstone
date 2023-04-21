@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-lg border-bottom">
+    <div class="container-fluid p-0">
+        <a class="ms-5 me-3" [routerLink]="['/welcome']" *ngIf="authServ.isDipLoggedIn()"><img width="76" height="76"
+                src="../../../assets/images/piccol.jpg" alt="Solo se la foto se la sente..."></a>
+        <a class="ms-5 me-3" [routerLink]="['/login']" *ngIf="!authServ.isDipLoggedIn()"><img width="76" height="76"
+                src="../../../assets/images/piccol.jpg" alt="Solo se la foto se la sente..."></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a *ngIf="authServ.isDipLoggedIn()" class="nav-link coloriMenu" aria-current="page"
+                        routerLink="/welcome"><i class="bi bi-house-fill"></i> Home</a>
+                    <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" aria-current="page"
+                        routerLink="/welcome"><i class="bi bi-house-fill"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti" routerLink="/prodotti"><i class="bi bi-apple"></i>
+                        Prodotti</a>
+                        <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti" routerLink="/prodotti"><i class="bi bi-apple"></i>
+                            Prodotti</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('MAGAZZINIERE'))" class="nav-link coloriMenu" title="Scarichi" routerLink="/scarichi"><i class="bi bi-truck"></i>
+                        Scarichi</a>
+                        <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Scarichi" routerLink="/scarichi"><i class="bi bi-truck"></i>
+                            Scarichi</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('CASSIERE'))" class="nav-link coloriMenu" title="Transazioni" routerLink="/transazioni"><i
+                            class="bi bi-file-earmark-text-fill"></i> Transazioni</a>
+                            <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Transazioni" routerLink="/transazioni"><i
+                                class="bi bi-file-earmark-text-fill"></i> Transazioni</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')" class="nav-link coloriMenu" title="Dipendenti" routerLink="/register"><i class="bi bi-person-fill"></i> Dipendenti</a>
+                            <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Dipendenti" routerLink="/register"><i class="bi bi-person-fill"></i> Dipendenti</a>
+                </li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle coloriMenu" routerLink="/" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu coloriMenu">
+                        <li><a class="dropdown-item coloriMenu" routerLink="/">Action</a></li>
+                        <li><a class="dropdown-item coloriMenu" routerLink="/">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item coloriMenu" routerLink="/">Something else here</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+            <!-- <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info" type="submit">Cerca</button>
+            </form> -->
+
+
+            <div class="col-nav pe-5">
+                <ul class="nav">
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')"
+                                src="../../../assets/images/dipendente.jpg" alt="User" width="40" height="50">
+                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE'))"
+                                src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
+                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('MAGAZZINIERE'))"
+                                src="../../../assets/images/ferrucci.jpg" alt="User" width="40" height="50">
+                            <img class="img-xs rounded-circle" *ngIf="!authServ.isDipLoggedIn()"
+                                src="../../../assets/images/offline_dipendente.png" alt="User" width="35" height="35">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end coloriMenu">
+                            <a *ngIf="!authServ.isDipLoggedIn()" class="dropdown-item coloriMenu"
+                                routerLink="/login">Accedi</a>
+                            <a class="text-white dropdown-item coloriMenu" *ngIf="authServ.isDipLoggedIn()">Ciao,
+                                {{cognomeDipLoggato}} {{nomeDipLoggato}}</a>
+                            <!-- <a class="dropdown-item coloriMenu" routerLink="/signup">Registrati</a> -->
+                            <!-- <a class="dropdown-item disabled" href="#">Profilo</a>
+                          <a class="dropdown-item disabled" href="#">Settings</a> -->
+                            <hr *ngIf="authServ.isDipLoggedIn()" class="dropdown-divider">
+                            <a class="dropdown-item coloriMenu" *ngIf="authServ.isDipLoggedIn()"
+                                routerLink="/logout">Esci</a>
+                            <a hidden class="dropdown-item disabled coloriMenu" *ngIf="!authServ.isDipLoggedIn()"
+                                routerLink="/logout">Esci</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- <div class="btn-group me-5">
+                <button type="button" class="btn btn-default dropdown-toggle dipdip coloriMenu"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="img-circle" src="/assets/images/dipendente.png" width="38" height="38"
+                        alt="Dipendente loggato.">
+                </button>
+                <ul class="dropdown-menu coloriMenu">
+                    <li><a routerLink="/login" *ngIf="!authServ.dipLogged()" class="dropdown-item coloriMenu">Accedi</a>
+                    </li>
+                    <li><a class="text-dark dropdown-item coloriMenu" *ngIf="authServ.dipLogged()">Ciao,
+                            {{authServ.dipendente()}}</a></li>
+                    <li><a routerLink="/register" *ngIf="!authServ.dipLogged()"
+                            class="dropdown-item coloriMenu">Registrati</a></li>
+                    <li><a href="#" class="dropdown-item coloriMenu">Disabilita</a></li>
+                    <li>
+                        <hr *ngIf="authServ.dipLogged()" class="dropdown-divider">
+                    </li>
+                    <li><a routerLink="/logout" *ngIf="authServ.dipLogged()" class="dropdown-item coloriMenu">Esci</a>
+                    </li>
+                    <li><a href="#" *ngIf="!authServ.dipLogged()" class="dropdown-item text-secondary disabled"
+                            hidden>Esci</a></li>
+                </ul>
+            </div> -->
+
+        </div>
+    </div>
+</nav>

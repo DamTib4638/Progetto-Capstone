@@ -1,0 +1,29 @@
+<div class="container text-center mt-5">
+    <div *ngIf="ruolo.includes('DIRETTORE')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: DIRETTORE.</h1>
+        <h3>Alla fine, SO SEMPRE DU RIGHE DE CODICE</h3>
+    </div>
+    <div *ngIf="ruolo.includes('MAGAZZINIERE')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: MAGAZZINIERE.</h1>
+        <h3>Ricorda che SEI IGNORANTISSIMO</h3>
+    </div>
+    <div *ngIf="ruolo.includes('CASSIERE')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: CASSIERE.</h1>
+        <h3>SEI FORTISSIMO!!! IL MIGLIORE IN TUTTO!! UN ONORE CONOSCERTI!</h3>
+    </div>
+    <div *ngIf="ruolo.includes('RESPONSABILE')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: RESPONSABILE.</h1>
+    </div>
+    <div *ngIf="ruolo.includes('PULIZIA')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: PULIZIA.</h1>
+    </div>
+    <div *ngIf="ruolo.includes('MANAGER')">
+        <h1>Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: MANAGER.</h1>
+    </div>
+    <!-- <h1 *ngIf="ruolo.includes('DIRETTORE')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: DIRETTORE. Sei nella home del supermercato.</h1>
+    <h1 *ngIf="ruolo.includes('MAGAZZINIERE')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: MAGAZZINIERE. Sei nella home del supermercato.</h1>
+    <h1 *ngIf="ruolo.includes('CASSIERE')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: CASSIERE. Sei nella home del supermercato.</h1>
+    <h1 *ngIf="ruolo.includes('RESPONSABILE')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: RESPONSABILE. Sei nella home del supermercato.</h1>
+    <h1 *ngIf="ruolo.includes('PULIZIA')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: PULIZIA. Sei nella home del supermercato.</h1>
+    <h1 *ngIf="ruolo.includes('MANAGER')">Buon Lavoro {{dipendente.cognome}} {{dipendente.nome}} - RUOLO: MANAGER. Sei nella home del supermercato.</h1> -->
+</div>

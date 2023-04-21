@@ -1,0 +1,19 @@
+<div class="d-flex flex-column align-items-center">
+    <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Scarico</h1>
+    <button class="btn btn-info text-white ms-5 mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
+    <div *ngIf="scarico" class="card w-50 m-3 contenitore_card">
+        <div class="card-header fw-bolder bg-dark text-warning">
+            Codice Scarico: {{scarico.idScarico}} -
+            Fornitore: {{ scarico.fornitore.nomeDittaFornitore }} -
+            Dipendente: {{ scarico.dipendente.cognome }} {{ scarico.dipendente.nome }}
+        </div>
+        <div *ngFor="let detScar of listaDettagliScarico" class="card-body">
+            <h4 class="card-text text-center text-info">Prodotto: {{ detScar.prodotto.nome }} - Marca: {{detScar.prodotto.marca}}</h4>
+            <h6 *ngIf="detScar.qtaAcquisto>0" class="card-text text-center">Quantità Prodotto: {{ detScar.qtaAcquisto }}</h6>
+            <h6 *ngIf="detScar.pesoAcquisto>0" class="card-text text-center">Quantità Prodotto: {{ detScar.pesoAcquisto }}</h6>
+            <h5 class="card-text text-center fw-light"><span class="fw-bold fst-italic text-decoration-underline">Prezzo Totale Acquisto: {{ detScar.prezzoAcquisto | currency: '€' }}</span> - Prezzo Acquisto Unitario: {{detScar.prodotto.prezzoAcquistoUnitario | currency: '€'}}</h5>
+            <h6 class="card-text text-center">Data Prenotazione: {{ detScar.scarico.dataPrenScar | date:'dd/MM/yyyy' }}</h6>
+            <h6 *ngIf="detScar.scarico.dataRegScar!=null" class="card-text text-center">Data Registrazione: {{detScar.scarico.dataRegScar | date: 'dd/MM/yyyy'}}</h6>
+        </div>
+    </div>
+</div>

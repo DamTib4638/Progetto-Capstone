@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row">
+        <div *ngIf="authServ.isDipLoggedIn() && (ruolo.includes('DIRETTORE') || ruolo.includes('MAGAZZINIERE'))"
+            class="col-3 mt-4">
+            <button title="Prenota Nuovo Rifornimento" class="btn btn-success rounded-5 mb-5" (click)="nuovoScarico()">
+                <i class="bi bi-plus-lg"><span>Prenota Rifornimento</span></i>
+            </button>
+        </div>
+    </div>
+    <div class="row fw-bold">
+        <div class="d-flex align-items-center">
+            <div class="col-1">
+                <h6>ID</h6>
+            </div>
+            <div class="col-2">
+                <h6>DATA PRENOTAZIONE</h6>
+            </div>
+            <div class="col-2">
+                <h6>DATA REGISTRAZIONE</h6>
+            </div>
+            <div class="col-2">
+                <h6>FORNITORE</h6>
+            </div>
+            <div class="col-3">
+                <h6>DIPENDENTE</h6>
+            </div>
+            <div class="col-2">
+                AZIONI
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let scar of listaScarichi" class="row align-items-center border border-start-0 border-end-0">
+        <div class="d-flex align-items-center py-2">
+            <div class="col-1" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <h6>{{scar.idScarico}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <h6>{{scar.dataPrenScar}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <h6>{{scar.dataRegScar}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <h6>{{scar.fornitore.nomeDittaFornitore}}</h6>
+            </div>
+            <div class="col-3" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <h6>{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - {{scar.dipendente.mansioni[0].tipoMansione}}</h6>
+            </div>
+            <div *ngIf="(!confermaCanc && !confermaReg) || (codiceVerificaCanc != scar.idScarico && codiceVerificaReg != scar.idScarico)" class="col-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                <button id="btn_01" title="Dettaglio Scarico" class="btn btn-info me-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <button *ngIf="scar.dataRegScar == null" id="btn_02" title="Registra Scarico" class="btn btn-success me-2" (click)="registraScarico(scar.idScarico)">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button *ngIf="scar.dataRegScar == null" id="btn_03" title="Elimina Scarico" class="btn btn-danger" (click)="cancellaScarico(scar.idScarico)">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </div>
+            <div *ngIf="confermaCanc && (codiceVerificaCanc == scar.idScarico)" class="col-2">
+                <button title="Conferma eliminazione" class="btn btn-success me-2" (click)="confermaCancellazione(scar.idScarico)">Cancella</button>
+                <button title="Annulla eliminazione" class="btn btn-danger" (click)="annullaCancellazione()">Annulla</button>
+            </div>
+            <div *ngIf="confermaReg && (codiceVerificaReg == scar.idScarico)" class="col-2">
+                <button title="Conferma registrazione" class="btn btn-success me-2" (click)="confermaRegistrazione(scar.idScarico)">Registra</button>
+                <button title="Annulla registrazione" class="btn btn-danger" (click)="annullaRegistrazione()">Annulla</button>
+            </div>
+        </div>
+    </div>
+    <!-- <table class="table table-dark table-hover table-responsive caption-top">
+        <caption class="text-white fw-bold">Lista scarichi</caption>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">DATA PRENOTAZIONE</th>
+                <th scope="col">DATA REGISTRAZIONE</th>
+                <th scope="col">FORNITORE</th>
+                <th scope="col">DIPENDENTE</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="coloreTesto">
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+            </tr>
+        </tbody>
+    </table> -->
+</div>
