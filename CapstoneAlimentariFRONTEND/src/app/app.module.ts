@@ -25,6 +25,9 @@ import { DettaglioScaricoComponent } from './components/dettaglio-scarico/dettag
 import { InserisciScaricoComponent } from './components/inserisci-scarico/inserisci-scarico.component';
 import { DettaglioTransazioneComponent } from './components/dettaglio-transazione/dettaglio-transazione.component';
 import { InserisciTransazioneComponent } from './components/inserisci-transazione/inserisci-transazione.component';
+import { DipendentiComponent } from './components/dipendenti/dipendenti.component';
+import { ModificaDipendenteComponent } from './components/modifica-dipendente/modifica-dipendente.component';
+import { DettaglioDipendenteComponent } from './components/dettaglio-dipendente/dettaglio-dipendente.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { InserisciTransazioneComponent } from './components/inserisci-transazion
     DettaglioScaricoComponent,
     InserisciScaricoComponent,
     DettaglioTransazioneComponent,
-    InserisciTransazioneComponent
+    InserisciTransazioneComponent,
+    DipendentiComponent,
+    ModificaDipendenteComponent,
+    DettaglioDipendenteComponent
   ],
   imports: [
     BrowserModule,

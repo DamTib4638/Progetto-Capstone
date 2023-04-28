@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div *ngIf="authServ.isDipLoggedIn() && (ruolo.includes('DIRETTORE'))"
+            class="col-3 mt-4">
+            <button title="Assumi Dipendente" class="btn btn-success rounded-5 mb-5" (click)="nuovoDipendente()">
+                <i class="bi bi-plus-lg"><span>Assumi Dipendente</span></i>
+            </button>
+        </div>
+    </div>
+    <div class="row fw-bold">
+        <div class="d-flex align-items-center">
+            <div class="col-1">
+                <h6>ID</h6>
+            </div>
+            <div class="col-2">
+                <h6>NOME</h6>
+            </div>
+            <div class="col-2">
+                <h6>COGNOME</h6>
+            </div>
+            <div class="col-3">
+                <h6>EMAIL</h6>
+            </div>
+            <div class="col-2">
+                <h6>RUOLO</h6>
+            </div>
+            <div class="col-2">
+                <h6>AZIONI</h6>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let dip of listaDipendenti" class="row align-items-center border border-start-0 border-end-0">
+        <div class="d-flex align-items-center py-2">
+            <div class="col-1" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <h6>{{dip.idDipendente}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <h6>{{dip.nome}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <h6>{{dip.cognome}}</h6>
+            </div>
+            <div class="col-3" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <h6>{{dip.email}}</h6>
+            </div>
+            <div class="col-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('DIRETTORE')">Direttore</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('BANCO')">Magazziniere Banco</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('SCAFFALE')">Magazziniere Scaffale</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('CASSIERE')">Cassiere</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('RESPONSABILE')">Responsabile</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('PULIZIA')">Pulizia</h6>
+                <h6 *ngIf="dip.mansioni[0].tipoMansione.includes('MANAGER')">Manager</h6>
+            </div>
+            <div *ngIf="(!confermaCanc) || (codiceVerificaCanc != dip.idDipendente)" class="col-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                <button id="btn_01" title="Dettaglio Dipendente" class="btn btn-info me-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <button id="btn_02" title="Modifica Dipendente" class="btn btn-success me-2" [routerLink]="['/modifica_dipendente/' + dip.idDipendente]">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button *ngIf="!(dip.mansioni[0].tipoMansione.includes('DIRETTORE'))" id="btn_03" title="Elimina Dipendente" class="btn btn-danger" (click)="eliminaDipendente(dip.idDipendente)">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </div>
+            <div *ngIf="confermaCanc && (codiceVerificaCanc == dip.idDipendente)" class="col-2">
+                <button title="Conferma eliminazione" class="btn btn-success me-2" (click)="confermaEliminazione(dip.idDipendente)">Elimina</button>
+                <button title="Annulla eliminazione" class="btn btn-danger" (click)="annullaEliminazione()">Annulla</button>
+            </div>
+            <!-- <div *ngIf="confermaReg && (codiceVerificaReg == scar.idScarico)" class="col-2">
+                <button title="Conferma registrazione" class="btn btn-success me-2" (click)="confermaRegistrazione(scar.idScarico)">Registra</button>
+                <button title="Annulla registrazione" class="btn btn-danger" (click)="annullaRegistrazione()">Annulla</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+

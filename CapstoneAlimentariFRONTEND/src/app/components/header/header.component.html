@@ -19,26 +19,33 @@
                         routerLink="/welcome"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a *ngIf="authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti" routerLink="/prodotti"><i class="bi bi-apple"></i>
+                    <a *ngIf="authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti"
+                        routerLink="/prodotti"><i class="bi bi-apple"></i>
                         Prodotti</a>
-                        <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti" routerLink="/prodotti"><i class="bi bi-apple"></i>
-                            Prodotti</a>
+                    <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Prodotti"
+                        routerLink="/prodotti"><i class="bi bi-apple"></i>
+                        Prodotti</a>
                 </li>
                 <li class="nav-item">
-                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('MAGAZZINIERE'))" class="nav-link coloriMenu" title="Scarichi" routerLink="/scarichi"><i class="bi bi-truck"></i>
+                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('MAGAZZINIERE'))"
+                        class="nav-link coloriMenu" title="Scarichi" routerLink="/scarichi"><i class="bi bi-truck"></i>
                         Scarichi</a>
-                        <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Scarichi" routerLink="/scarichi"><i class="bi bi-truck"></i>
-                            Scarichi</a>
+                    <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Scarichi"
+                        routerLink="/scarichi"><i class="bi bi-truck"></i>
+                        Scarichi</a>
                 </li>
                 <li class="nav-item">
-                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('CASSIERE'))" class="nav-link coloriMenu" title="Transazioni" routerLink="/transazioni"><i
+                    <a *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('DIRETTORE') || mansioni.includes('CASSIERE'))"
+                        class="nav-link coloriMenu" title="Transazioni" routerLink="/transazioni"><i
                             class="bi bi-file-earmark-text-fill"></i> Transazioni</a>
-                            <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Transazioni" routerLink="/transazioni"><i
-                                class="bi bi-file-earmark-text-fill"></i> Transazioni</a>
+                    <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Transazioni"
+                        routerLink="/transazioni"><i class="bi bi-file-earmark-text-fill"></i> Transazioni</a>
                 </li>
                 <li class="nav-item">
-                    <a *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')" class="nav-link coloriMenu" title="Dipendenti" routerLink="/register"><i class="bi bi-person-fill"></i> Dipendenti</a>
-                            <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Dipendenti" routerLink="/register"><i class="bi bi-person-fill"></i> Dipendenti</a>
+                    <a *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')" class="nav-link coloriMenu"
+                        title="Dipendenti" routerLink="/dipendenti"><i class="bi bi-person-fill"></i> Dipendenti</a>
+                    <a hidden *ngIf="!authServ.isDipLoggedIn()" class="nav-link coloriMenu" title="Dipendenti"
+                        routerLink="/dipendenti"><i class="bi bi-person-fill"></i> Dipendenti</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle coloriMenu" routerLink="/" data-bs-toggle="dropdown"
@@ -64,14 +71,20 @@
             <div class="col-nav pe-5">
                 <ul class="nav">
                     <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')"
+                        <a class="dropdown-toggle coloriMenu" data-bs-toggle="dropdown" href="#">
+                            <img class="img-fluid rounded-circle"
+                                *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')"
                                 src="../../../assets/images/dipendente.jpg" alt="User" width="40" height="50">
-                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE'))"
+                            <img class="img-fluid rounded-circle"
+                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE'))"
                                 src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
-                            <img class="img-xs rounded-circle" *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('MAGAZZINIERE'))"
+                            <img class="img-fluid rounded-circle"
+                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('BANCO'))"
                                 src="../../../assets/images/ferrucci.jpg" alt="User" width="40" height="50">
-                            <img class="img-xs rounded-circle" *ngIf="!authServ.isDipLoggedIn()"
+                            <img class="img-fluid rounded-circle"
+                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('SCAFFALE'))"
+                                src="../../../assets/images/violi.jpg" alt="User" width="40" height="50">
+                            <img class="img-fluid rounded-circle" *ngIf="!authServ.isDipLoggedIn()"
                                 src="../../../assets/images/offline_dipendente.png" alt="User" width="35" height="35">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end coloriMenu">

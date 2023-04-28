@@ -10,6 +10,13 @@ import { catchError, throwError } from 'rxjs';
 export class DipendenteService {
 
     baseUrl: string = "http://localhost:8080/api/alimentari/dipendenti";
+    registerUrl: string = 'http://localhost:8080/api/auth/alimentari/register';
+
+    dipInTurno = localStorage.getItem("dipendenteCorrente");
+    dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
+    accesso: HttpHeaders = new HttpHeaders({
+        'Authorization': 'Bearer '+this.dipInTurnoParse.accessToken
+    })
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,11 +29,31 @@ export class DipendenteService {
     }
 
     getDipendenteById(id: number) {
-        return this.http.get<Dipendente>(this.baseUrl + "/id/" + id).pipe(
+        return this.http.get<Dipendente>(this.baseUrl + "/id/" + id, {headers: this.accesso}).pipe(
             catchError((err) => {
                 return throwError(this.getMessaggioErrore(err.stato));
             })
         );
+    }
+
+    getAllDipendenti() {
+        return this.http.get<Dipendente[]>(this.baseUrl, {headers: this.accesso}).pipe(
+            catchError((err) => {
+                return throwError(this.getMessaggioErrore(err.stato));
+            })
+        );
+    }
+
+    registerDipendente(d: Dipendente) {
+        return this.http.post<Dipendente>(this.registerUrl, d, {headers: this.accesso}).subscribe(() => {
+            this.indietro();
+        })
+    }
+
+    editDipendente(d: Dipendente) {
+        return this.http.put<Dipendente>(this.baseUrl + '/' + d.idDipendente, d, {headers: this.accesso}).subscribe(() => {
+            this.indietro();
+        })
     }
 
     getMessaggioErrore(stato: number) {
@@ -41,7 +68,8 @@ export class DipendenteService {
     }
 
     indietro() {
-        this.router.navigate(['/welcome']);
+        window.location.href = 'dipendenti';
+        // this.router.navigate(['/welcome']);
     }
 
 }

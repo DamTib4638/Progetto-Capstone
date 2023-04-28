@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cassa } from 'src/app/entity/cassa.interface';
 import { DettaglioTransazione } from 'src/app/entity/dettaglio-transazione.interface';
 import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Prodotto } from 'src/app/entity/prodotto.interface';
 import { Transazione } from 'src/app/entity/transazione.interface';
 import { AuthJwtService } from 'src/app/services/auth-jwt.service';
+import { DipendenteService } from 'src/app/services/dipendente.service';
 import { TransazioneService } from 'src/app/services/transazione.service';
 
 @Component({
-  selector: 'app-dettaglio-transazione',
-  templateUrl: './dettaglio-transazione.component.html',
-  styleUrls: ['./dettaglio-transazione.component.scss']
+    selector: 'app-dettaglio-transazione',
+    templateUrl: './dettaglio-transazione.component.html',
+    styleUrls: ['./dettaglio-transazione.component.scss']
 })
 export class DettaglioTransazioneComponent implements OnInit {
+
+    emailCorrente: string = '';
+    ruolo: string = '';
 
     listaTransazioni: Transazione[] = [];
 
@@ -66,29 +70,45 @@ export class DettaglioTransazioneComponent implements OnInit {
     listaProdottiVenduti: Prodotto[] = [];
     listaDettagliTransazione: DettaglioTransazione[] = [];
 
-  constructor(private ar: ActivatedRoute, private authServ: AuthJwtService, private tranServ: TransazioneService) { }
+    constructor(private ar: ActivatedRoute, private authServ: AuthJwtService, private tranServ: TransazioneService, private dipServ: DipendenteService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.authServ.isAuthenticated();
-    let id: number = this.ar.snapshot.params['id'];
-    this.tranServ.getAllTransazioni().subscribe((risp) => {
-        this.listaTransazioni = risp;
-        for (let tr of this.listaTransazioni) {
-            if (Number(tr.idTransazione)==id) {
-                this.transazione = tr;
-                this.tranServ.getCassaById(this.transazione.cassa.idCassa).subscribe((risp) => {
-                    this.cassa = risp;
-                })
-                this.tranServ.getDettagliTransazioniByIdTransazione(this.transazione.idTransazione).subscribe((risp) => {
-                    this.listaDettagliTransazione = risp;
-                })
-            }
+    ngOnInit(): void {
+        this.authServ.isAuthenticated();
+        this.emailCorrente = this.authServ.getEmailCorrente();
+        console.log(this.emailCorrente);
+        if (this.emailCorrente != null) {
+            this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
+                this.dipendente = ris;
+                console.log(this.dipendente);
+                this.ruolo = this.dipendente.mansioni[0].tipoMansione;
+                console.log(this.ruolo);
+                if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('CASSIERE'))) {
+                    console.log(this.ruolo);
+                    this.router.navigate(['/forbidden']);
+                } else {
+                    let id: number = this.ar.snapshot.params['id'];
+                    console.log(id);
+                    this.tranServ.getAllTransazioni().subscribe((risp) => {
+                        this.listaTransazioni = risp;
+                        for (let tr of this.listaTransazioni) {
+                            if (Number(tr.idTransazione) == id) {
+                                this.transazione = tr;
+                                this.tranServ.getCassaById(this.transazione.cassa.idCassa).subscribe((risp) => {
+                                    this.cassa = risp;
+                                })
+                                this.tranServ.getDettagliTransazioniByIdTransazione(this.transazione.idTransazione).subscribe((risp) => {
+                                    this.listaDettagliTransazione = risp;
+                                })
+                            }
+                        }
+                    })
+                }
+            })
         }
-    })
-  }
+    }
 
-  tornaIndietro() {
-    this.tranServ.indietro();
-  }
+    tornaIndietro() {
+        this.tranServ.indietro();
+    }
 
 }

@@ -27,7 +27,7 @@ public class ScaricoController {
 	@Autowired ScaricoService scarServ;
 	
 	@PostMapping
-	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO')")
+	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO') || hasRole('MAGAZZINIERE_SCAFFALE')")
 	public ResponseEntity<Scarico> inserisciPrenotazioneScarico(@RequestBody OrdinazioneDTO ordDto) {
 		
 		if(ordDto != null) {
@@ -38,7 +38,7 @@ public class ScaricoController {
 	}
 	
 	@PutMapping("/gestione/{id}")
-	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO')")
+	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO') || hasRole('MAGAZZINIERE_SCAFFALE')")
 	public ResponseEntity<Scarico> registraScarico(@PathVariable Long id, @RequestBody Scarico scarico) {
 		if(id > 0) {
 			Boolean registrazioneAvvenuta = scarServ.registraProdottiScarico(scarico.getIdScarico());
@@ -51,7 +51,7 @@ public class ScaricoController {
 	}
 	
 	@DeleteMapping("/gestione/{id}")
-	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO')")
+	@PreAuthorize("hasRole('DIRETTORE') || hasRole('MAGAZZINIERE_BANCO') || hasRole('MAGAZZINIERE_SCAFFALE')")
 	public ResponseEntity<Boolean> eliminaScarico(@PathVariable Long id) {
 		Boolean eliminazioneAvvenuta = scarServ.eliminaScarico(id);
 		if(eliminazioneAvvenuta)

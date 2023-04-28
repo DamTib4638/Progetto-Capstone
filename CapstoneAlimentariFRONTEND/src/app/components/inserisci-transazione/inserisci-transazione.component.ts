@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Cassa } from 'src/app/entity/cassa.interface';
 import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Ordinazione } from 'src/app/entity/ordinazione.interface';
@@ -60,19 +61,25 @@ export class InserisciTransazioneComponent implements OnInit {
     constructor(private tranServ: TransazioneService,
         private authServ: AuthJwtService,
         private prodServ: ProdottoService,
-        private dipServ: DipendenteService) { }
+        private dipServ: DipendenteService,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.authServ.isAuthenticated();
         this.emailCorrente = this.authServ.getEmailCorrente();
-        if(this.emailCorrente != null) {
+        if (this.emailCorrente != null) {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
+                if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('CASSIERE'))) {
+                    console.log(this.ruolo);
+                    this.router.navigate(['/forbidden']);
+                } else {
+                    this.visualizzaListaCasse();
+                    this.visualizzaListaProdotti();
+                }
             })
         }
-        this.visualizzaListaCasse();
-        this.visualizzaListaProdotti();
     }
 
     insert() {

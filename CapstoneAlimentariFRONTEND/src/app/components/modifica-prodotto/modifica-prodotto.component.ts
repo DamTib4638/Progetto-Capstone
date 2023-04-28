@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Prodotto } from 'src/app/entity/prodotto.interface';
 import { Scaffale } from 'src/app/entity/scaffale.interface';
 import { AuthJwtService } from 'src/app/services/auth-jwt.service';
+import { DipendenteService } from 'src/app/services/dipendente.service';
 import { ProdottoService } from 'src/app/services/prodotto.service';
 
 @Component({
@@ -12,6 +14,22 @@ import { ProdottoService } from 'src/app/services/prodotto.service';
     styleUrls: ['./modifica-prodotto.component.scss']
 })
 export class ModificaProdottoComponent implements OnInit {
+
+    emailCorrente: string = '';
+    ruolo: string = '';
+    dipendente: Dipendente = {
+        idDipendente: 0,
+        nome: '',
+        cognome: '',
+        eta: 0,
+        codFis: '',
+        telefono: '',
+        indirizzo: '',
+        citta: '',
+        email: '',
+        password: '',
+        mansioni: []
+    };
 
     sceltaQtaPeso: number = 0;
 
@@ -44,23 +62,39 @@ export class ModificaProdottoComponent implements OnInit {
         scaffale: null
     }
 
-    constructor(private prodServ: ProdottoService, private ar: ActivatedRoute, private authServ: AuthJwtService) { }
+    constructor(private prodServ: ProdottoService, private ar: ActivatedRoute, private authServ: AuthJwtService, private dipServ: DipendenteService, private router: Router) { }
 
     ngOnInit(): void {
         this.authServ.isAuthenticated();
-        this.visualizzaListaScaffali();
-        let id: number = this.ar.snapshot.params['id'];
-        this.prodServ.getAllProdotti().subscribe((risp) => {
-            this.listaProdotti = risp;
-            console.log(this.listaProdotti);
-            for (let pr of this.listaProdotti) {
-                if (Number(pr.idProdotto) == id) {
-                    this.prod = pr;
-                    console.log(this.prod.scaffale);
-                    this.scaf = this.prod.scaffale;
+        this.emailCorrente = this.authServ.getEmailCorrente();
+        console.log(this.emailCorrente);
+        if (this.emailCorrente != null) {
+            this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
+                this.dipendente = ris;
+                console.log(this.dipendente);
+                this.ruolo = this.dipendente.mansioni[0].tipoMansione;
+                console.log(this.ruolo);
+                if (!(this.ruolo.includes('DIRETTORE'))) {
+                    console.log(this.ruolo);
+                    this.router.navigate(['/forbidden']);
+                } else {
+                    this.visualizzaListaScaffali();
+                    let id: number = this.ar.snapshot.params['id'];
+                    this.prodServ.getAllProdotti().subscribe((risp) => {
+                        this.listaProdotti = risp;
+                        console.log(this.listaProdotti);
+                        for (let pr of this.listaProdotti) {
+                            if (Number(pr.idProdotto) == id) {
+                                this.prod = pr;
+                                console.log(this.prod.scaffale);
+                                this.scaf = this.prod.scaffale;
+                            }
+                        }
+                    });
                 }
-            }
-        });
+            })
+        }
+
 
     }
 

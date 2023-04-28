@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Prodotto } from 'src/app/entity/prodotto.interface';
 import { Scaffale } from 'src/app/entity/scaffale.interface';
 import { AuthJwtService } from 'src/app/services/auth-jwt.service';
+import { DipendenteService } from 'src/app/services/dipendente.service';
 import { ProdottoService } from 'src/app/services/prodotto.service';
 
 @Component({
@@ -11,6 +14,22 @@ import { ProdottoService } from 'src/app/services/prodotto.service';
     styleUrls: ['./inserisci-prodotto.component.scss']
 })
 export class InserisciProdottoComponent implements OnInit {
+
+    emailCorrente: string = '';
+    ruolo: string = '';
+    dipendente: Dipendente = {
+        idDipendente: 0,
+        nome: '',
+        cognome: '',
+        eta: 0,
+        codFis: '',
+        telefono: '',
+        indirizzo: '',
+        citta: '',
+        email: '',
+        password: '',
+        mansioni: []
+    };
 
     sceltaQtaPeso: number = 0;
 
@@ -42,11 +61,26 @@ export class InserisciProdottoComponent implements OnInit {
         scaffale: null
     }
 
-    constructor(private prodServ: ProdottoService, private authServ: AuthJwtService) { }
+    constructor(private prodServ: ProdottoService, private authServ: AuthJwtService, private dipServ: DipendenteService, private router: Router) { }
 
     ngOnInit(): void {
         this.authServ.isAuthenticated();
-        this.visualizzaListaScaffali();
+        this.emailCorrente = this.authServ.getEmailCorrente();
+        console.log(this.emailCorrente);
+        if (this.emailCorrente != null) {
+            this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
+                this.dipendente = ris;
+                console.log(this.dipendente);
+                this.ruolo = this.dipendente.mansioni[0].tipoMansione;
+                console.log(this.ruolo);
+                if (!(this.ruolo.includes('DIRETTORE'))) {
+                    console.log(this.ruolo);
+                    this.router.navigate(['/forbidden']);
+                } else {
+                    this.visualizzaListaScaffali();
+                }
+            })
+        }
     }
 
     insert(form: NgForm) {

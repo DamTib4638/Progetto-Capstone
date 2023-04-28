@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DettaglioScarico } from 'src/app/entity/dettaglio-scarico.interface';
 import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Fornitore } from 'src/app/entity/fornitore.interface';
 import { Prodotto } from 'src/app/entity/prodotto.interface';
 import { Scarico } from 'src/app/entity/scarico.interface';
 import { AuthJwtService } from 'src/app/services/auth-jwt.service';
+import { DipendenteService } from 'src/app/services/dipendente.service';
 import { ScaricoService } from 'src/app/services/scarico.service';
 
 @Component({
@@ -14,6 +15,9 @@ import { ScaricoService } from 'src/app/services/scarico.service';
     styleUrls: ['./dettaglio-scarico.component.scss']
 })
 export class DettaglioScaricoComponent implements OnInit {
+
+    emailCorrente: string = '';
+    ruolo: string = '';
 
     listaScarichi: Scarico[] = [];
 
@@ -70,31 +74,47 @@ export class DettaglioScaricoComponent implements OnInit {
     listaProdottiOrdinati: Prodotto[] = [];
     listaDettagliScarico: DettaglioScarico[] = [];
 
-    constructor(private ar: ActivatedRoute, private scarServ: ScaricoService, private authServ: AuthJwtService) { }
+    constructor(private ar: ActivatedRoute, private scarServ: ScaricoService, private authServ: AuthJwtService, private dipServ: DipendenteService, private router: Router) { }
 
     ngOnInit(): void {
         this.authServ.isAuthenticated();
-        let id: number = this.ar.snapshot.params['id'];
-        this.scarServ.getAllScarichi().subscribe((risp) => {
-            this.listaScarichi = risp;
-            console.log(this.listaScarichi);
-            for (let sc of this.listaScarichi) {
-                if (Number(sc.idScarico) == id) {
-                    this.scarico = sc;
-                    console.log(this.scarico.fornitore.idFornitore);
-                    this.scarServ.getFornitoreById(this.scarico.fornitore.idFornitore).subscribe((risp) => {
-                        console.log(risp);
-                        this.fornitore = risp;
-                    })
-                    console.log(this.scarico.idScarico);
-                    this.scarServ.getDettagliScarichiByIdScarico(this.scarico.idScarico).subscribe((risp) => {
-                        console.log(risp);
-                        this.listaDettagliScarico = risp;
+        this.emailCorrente = this.authServ.getEmailCorrente();
+        console.log(this.emailCorrente);
+        if (this.emailCorrente != null) {
+            this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
+                this.dipendente = ris;
+                console.log(this.dipendente);
+                this.ruolo = this.dipendente.mansioni[0].tipoMansione;
+                console.log(this.ruolo);
+                if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('MAGAZZINIERE'))) {
+                    console.log(this.ruolo);
+                    this.router.navigate(['/forbidden']);
+                } else {
+                    let id: number = this.ar.snapshot.params['id'];
+                    this.scarServ.getAllScarichi().subscribe((risp) => {
+                        this.listaScarichi = risp;
+                        console.log(this.listaScarichi);
+                        for (let sc of this.listaScarichi) {
+                            if (Number(sc.idScarico) == id) {
+                                this.scarico = sc;
+                                console.log(this.scarico.fornitore.idFornitore);
+                                this.scarServ.getFornitoreById(this.scarico.fornitore.idFornitore).subscribe((risp) => {
+                                    console.log(risp);
+                                    this.fornitore = risp;
+                                })
+                                console.log(this.scarico.idScarico);
+                                this.scarServ.getDettagliScarichiByIdScarico(this.scarico.idScarico).subscribe((risp) => {
+                                    console.log(risp);
+                                    this.listaDettagliScarico = risp;
 
-                    })
+                                })
+                            }
+                        }
+                    });
                 }
-            }
-        });
+            })
+        }
+
     }
 
     tornaIndietro() {

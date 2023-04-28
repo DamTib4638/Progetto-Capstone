@@ -52,7 +52,7 @@ export class ProdottoService {
     }
 
     editProdotto(p: Prodotto) {
-        return this.http.put<Prodotto>(this.baseUrlProdotti + '/' + p.idProdotto, p).subscribe(() => {
+        return this.http.put<Prodotto>(this.baseUrlProdotti + '/' + p.idProdotto, p, {headers: this.accesso}).subscribe(() => {
             this.indietro();
         })
     }

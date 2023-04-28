@@ -33,13 +33,13 @@ public class DipendenteController {
 	}
 	
 	@GetMapping
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<List<Dipendente>> visualizzaTuttiDipendenti() {
 		return ResponseEntity.ok().body(dipServ.recuperaTuttiDipendenti());
 	}
 	
 	@GetMapping("/id/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<Dipendente> visualizzaDipendente(@PathVariable Long id) {
 		return ResponseEntity.ok().body(dipServ.recuperaDipendente(id));
 	}

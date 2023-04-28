@@ -18,6 +18,9 @@ import { DettaglioScaricoComponent } from './components/dettaglio-scarico/dettag
 import { InserisciScaricoComponent } from './components/inserisci-scarico/inserisci-scarico.component';
 import { DettaglioTransazioneComponent } from './components/dettaglio-transazione/dettaglio-transazione.component';
 import { InserisciTransazioneComponent } from './components/inserisci-transazione/inserisci-transazione.component';
+import { DipendentiComponent } from './components/dipendenti/dipendenti.component';
+import { DettaglioDipendenteComponent } from './components/dettaglio-dipendente/dettaglio-dipendente.component';
+import { ModificaDipendenteComponent } from './components/modifica-dipendente/modifica-dipendente.component';
 
 const routes: Routes = [
     {path:'', component: LoginComponent},
@@ -36,6 +39,10 @@ const routes: Routes = [
     {path:'transazioni', component: TransazioniComponent},
     {path:'dettaglio_transazione/:id', component: DettaglioTransazioneComponent},
     {path:'inserisci_transazione', component: InserisciTransazioneComponent},
+
+    {path:'dipendenti', component: DipendentiComponent},
+    {path:'dettaglio_dipendente/:id', component: DettaglioDipendenteComponent},
+    {path:'modifica_dipendente/:id', component: ModificaDipendenteComponent},
 
     {path:'logout', component: LogoutComponent},
     {path:'register', component: RegisterComponent},

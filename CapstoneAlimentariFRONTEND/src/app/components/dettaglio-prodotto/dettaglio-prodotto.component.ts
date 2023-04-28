@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Dipendente } from 'src/app/entity/dipendente.interface';
 import { Prodotto } from 'src/app/entity/prodotto.interface';
 import { AuthJwtService } from 'src/app/services/auth-jwt.service';
+import { DipendenteService } from 'src/app/services/dipendente.service';
 import { ProdottoService } from 'src/app/services/prodotto.service';
 
 @Component({

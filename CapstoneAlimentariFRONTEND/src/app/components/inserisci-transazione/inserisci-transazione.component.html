@@ -32,8 +32,12 @@
                     <option *ngFor="let prod of listaProdotti" value="{{prod.idProdotto}}">
                         {{prod.idProdotto}} - {{prod.nome}}</option>
                 </select>
-                <input class="me-5 text-center" *ngIf="idProdotto.value > 0" type="number" name="quantitaProdotto"
-                    id="quantitaProdotto" ngModel #quantitaProdotto="ngModel" required min="1">
+                <span *ngFor="let prod of listaProdotti">
+                    <input class="me-5 text-center" *ngIf="idProdotto.value > 0 && idProdotto.value == prod.idProdotto && prod.qtaDisponibile != null" type="number" name="quantitaProdotto"
+                    id="quantitaProdotto" ngModel #quantitaProdotto="ngModel" required min="1" max="{{prod.qtaDisponibile}}">
+                    <input class="me-5 text-center" *ngIf="idProdotto.value > 0 && idProdotto.value == prod.idProdotto && prod.pesoDisponibile != null" type="number" name="quantitaProdotto"
+                    id="quantitaProdotto" ngModel #quantitaProdotto="ngModel" required min="1" max="{{prod.pesoDisponibile}}">
+                </span>
                 <button type="submit" class="btn btn-info text-white" [disabled]="newTransazione.invalid">Aggiungi
                     Prodotto</button>
             </div>
