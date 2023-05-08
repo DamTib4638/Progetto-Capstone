@@ -3,6 +3,8 @@ import { Dipendente } from '../entity/dipendente.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { Contratto } from '../entity/contratto.interface';
+import { DipendenteDto } from '../entity/dipendente-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class DipendenteService {
 
     baseUrl: string = "http://localhost:8080/api/alimentari/dipendenti";
     registerUrl: string = 'http://localhost:8080/api/auth/alimentari/register';
+    baseUrlContratti: string = 'http://localhost:8080/api/alimentari/contratti';
 
     dipInTurno = localStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
@@ -44,8 +47,16 @@ export class DipendenteService {
         );
     }
 
-    registerDipendente(d: Dipendente) {
-        return this.http.post<Dipendente>(this.registerUrl, d, {headers: this.accesso}).subscribe(() => {
+    getAllContratti() {
+        return this.http.get<Contratto[]>(this.baseUrlContratti, {headers: this.accesso}).pipe(
+            catchError((err) => {
+                return throwError(this.getMessaggioErrore(err.stato));
+            })
+        );
+    }
+
+    registerDipendente(d: DipendenteDto) {
+        return this.http.post<DipendenteDto>(this.registerUrl, d, {headers: this.accesso}).subscribe(() => {
             this.indietro();
         })
     }

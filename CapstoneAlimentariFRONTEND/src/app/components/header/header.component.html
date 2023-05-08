@@ -76,8 +76,9 @@
                                 *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')"
                                 src="../../../assets/images/dipendente.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
-                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE'))"
-                                src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
+                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE')) && cognomeDipLoggato.includes('Pastore')" src="../../../assets/images/francesco.jpg" alt="User" width="40" height="50">
+                            <img class="img-fluid rounded-circle"
+                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE')) && cognomeDipLoggato.includes('Gavioli')" src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
                                 *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('BANCO'))"
                                 src="../../../assets/images/ferrucci.jpg" alt="User" width="40" height="50">

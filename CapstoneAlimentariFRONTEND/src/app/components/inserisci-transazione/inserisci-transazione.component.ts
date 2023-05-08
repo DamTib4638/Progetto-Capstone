@@ -18,11 +18,13 @@ import { TransazioneService } from 'src/app/services/transazione.service';
 })
 export class InserisciTransazioneComponent implements OnInit {
 
-    quantitaProdotto: number = 0;
+    quantitaProdotto: number = 1;
+    pesoProdotto: number = 1;
     ruolo: string = '';
     idCassa: number = 0;
     emailCorrente: string = '';
     nomeProdotto: string = '';
+    prodottoPresenteInLista: boolean = false;
 
     listaCasse: Cassa[] = [];
     listaProdotti: Prodotto[] = [];
@@ -97,16 +99,46 @@ export class InserisciTransazioneComponent implements OnInit {
         this.cassa.numeroCassa = form.value.numeroCassa;
     }
 
-    aggiungiProdottoDto(form: NgForm) {
-        console.log(form.value.idProdotto);
-        console.log(form.value.quantitaProdotto);
+    aggiungiProdottoDto(idProdotto: number, qta: number) {
+        // console.log(form.value.idProdotto);
+        // console.log(form.value.quantitaProdotto);
+        console.log(idProdotto);
+        console.log(qta);
+        this.prodottoPresenteInLista = false;
         let prodottoDto: ProdottoDto = {
             idProdotto: 0,
             quantita: 0
         }
-        prodottoDto.idProdotto = form.value.idProdotto;
-        prodottoDto.quantita = form.value.quantitaProdotto;
-        this.listaProdottiDto.push(prodottoDto);
+        // prodottoDto.idProdotto = form.value.idProdotto;
+        // if (form.value.quantitaProdotto != null && form.value.quantitaProdotto != undefined) {
+        //     prodottoDto.quantita = form.value.quantitaProdotto;
+        // }
+        // if (form.value.pesoProdotto != null && form.value.pesoProdotto != undefined) {
+        //     prodottoDto.quantita = form.value.pesoProdotto;
+        // }
+        if (this.listaProdottiDto.length > 0) {
+            for (let p of this.listaProdottiDto) {
+                if (p.idProdotto == idProdotto) {
+                    this.prodottoPresenteInLista = true;
+                    for (let pr of this.listaProdotti) {
+                        if (pr.idProdotto == idProdotto && pr.qtaDisponibile != null && pr.pesoDisponibile == null && (p.quantita+qta) >= pr.qtaDisponibile) {
+                            p.quantita = pr.qtaDisponibile;
+                        } else if (pr.idProdotto == idProdotto && pr.pesoDisponibile != null && pr.qtaDisponibile == null && (p.quantita+qta) >= pr.pesoDisponibile) {
+                            p.quantita = pr.pesoDisponibile;
+                        } else if (pr.idProdotto == idProdotto && pr.qtaDisponibile != null && pr.pesoDisponibile == null && (p.quantita+qta) < pr.qtaDisponibile) {
+                            p.quantita += qta;
+                        } else if (pr.idProdotto == idProdotto && pr.pesoDisponibile != null && pr.qtaDisponibile == null && (p.quantita+qta) < pr.pesoDisponibile) {
+                            p.quantita += qta;
+                        }
+                    }
+                }
+            }
+        }
+        if (!this.prodottoPresenteInLista) {
+            prodottoDto.idProdotto = idProdotto;
+            prodottoDto.quantita = qta;
+            this.listaProdottiDto.push(prodottoDto);
+        }
         console.log(this.listaProdottiDto);
     }
 

@@ -116,7 +116,8 @@ public class TransazioneService {
 	// GET
 	public List<Transazione> recuperaTutteTransazioni() {
 		try {
-			List<Transazione> listaTransazioni = tranRepo.findAll();
+//			List<Transazione> listaTransazioni = tranRepo.findAll();
+			List<Transazione> listaTransazioni = tranRepo.findAllByOrderByIdTransazione();
 			return listaTransazioni;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

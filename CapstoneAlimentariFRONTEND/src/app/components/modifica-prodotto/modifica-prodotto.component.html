@@ -110,9 +110,9 @@
         </div>
         <!-- Quantità O Peso (uno dei due fai scelta e > 0), Prezzo Acquisto (obbligatorio > 0), Prezzo Vendita (obbligatorio > 0) -->
         <div class="row">
-            <div class="col-4">
+            <div class="col-4" hidden>
                 <label class="form-label" for="sceltaQtaPeso">SCEGLI TRA QUANTITà E PESO *</label>
-                <select name="sceltaQtaPeso" class="form-select" [(ngModel)]="sceltaQtaPeso">
+                <select name="sceltaQtaPeso" class="form-select" [(ngModel)]="sceltaQtaPeso" disabled>
                     <option value="0">--</option>
                     <option value="1">Prodotto venduto al pezzo</option>
                     <option value="2">Prodotto venduto al chilo</option>
@@ -121,16 +121,6 @@
                     Scegli una delle due opzioni
                 </span>
             </div>
-            <!-- inizio ngIf -->
-            <div class="col-sm-4" *ngIf="sceltaQtaPeso == 1">
-                <label class="form-label" for="qtaDisponibile">Quantità Disponibile Prodotto</label>
-                <input type="number" name="qtaDisponibile" id="qtaDisponibile" class="form-control" [ngModel]="prod.qtaDisponibile" #qtaDisponibile="ngModel">
-            </div>
-            <div class="col-sm-4" *ngIf="sceltaQtaPeso == 2">
-                <label class="form-label" for="pesoDisponibile">Peso Disponibile Prodotto</label>
-                <input type="number" name="pesoDisponibile" id="pesoDisponibile" class="form-control" [ngModel]="prod.pesoDisponibile" #pesoDisponibile="ngModel">
-            </div>
-            <!-- fine ngIf -->
         </div>
         <div class="row">
             <!-- Prezzo Acq (obbligatorio e > 0) -->
@@ -149,6 +139,16 @@
                     Prezzo Vendita Unitario Prodotto è OBBLIGATORIO e deve avere un valore maggiore di 0
                 </span>
             </div>
+            <!-- inizio ngIf -->
+            <div class="col-sm-4" *ngIf="sceltaQtaPeso == 1">
+                <label class="form-label" for="qtaDisponibile">Quantità Disponibile Prodotto</label>
+                <input type="number" name="qtaDisponibile" id="qtaDisponibile" class="form-control" [ngModel]="prod.qtaDisponibile" #qtaDisponibile="ngModel">
+            </div>
+            <div class="col-sm-4" *ngIf="sceltaQtaPeso == 2">
+                <label class="form-label" for="pesoDisponibile">Peso Disponibile Prodotto</label>
+                <input type="number" name="pesoDisponibile" id="pesoDisponibile" class="form-control" [ngModel]="prod.pesoDisponibile" #pesoDisponibile="ngModel">
+            </div>
+            <!-- fine ngIf -->
         </div>
         <!-- Percentuale Offerta, Scaffale (Get Tutti) (obbligatorio) -->
         <div class="row">

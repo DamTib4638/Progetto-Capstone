@@ -19,9 +19,10 @@ import { ScaricoService } from 'src/app/services/scarico.service';
 })
 export class InserisciScaricoComponent implements OnInit {
 
-    quantitaProdotto: number = 0;
+    quantitaProdotto: number = 1;
     ruolo: string = '';
     idFornitore: number = 0;
+    prodottoPresenteInLista: boolean = false;
 
     listaFornitori: Fornitore[] = [];
     listaProdotti: Prodotto[] = [];
@@ -106,16 +107,30 @@ export class InserisciScaricoComponent implements OnInit {
         this.fornitore.nomeDittaFornitore = form.value.nomeDittaFornitore;
     }
 
-    aggiungiProdottoDto(form: NgForm) {
-        console.log(form.value.idProdotto);
-        console.log(form.value.quantitaProdotto);
+    aggiungiProdottoDto(idProdotto: number, qta: number) {
+        // console.log(form.value.idProdotto);
+        // console.log(form.value.quantitaProdotto);
+        this.prodottoPresenteInLista = false;
         let prodottoDto: ProdottoDto = {
             idProdotto: 0,
             quantita: 0
         }
-        prodottoDto.idProdotto = form.value.idProdotto;
-        prodottoDto.quantita = form.value.quantitaProdotto;
-        this.listaProdottiDto.push(prodottoDto);
+        // prodottoDto.idProdotto = form.value.idProdotto;
+        // prodottoDto.quantita = form.value.quantitaProdotto;
+        if (this.listaProdottiDto.length > 0) {
+            for (let p of this.listaProdottiDto) {
+                if (p.idProdotto == idProdotto) {
+                    this.prodottoPresenteInLista = true;
+                    p.quantita += qta;
+                }
+            }
+        }
+        if (!this.prodottoPresenteInLista) {
+            prodottoDto.idProdotto = idProdotto;
+            prodottoDto.quantita = qta;
+            this.listaProdottiDto.push(prodottoDto);
+        }
+        // this.listaProdottiDto.push(prodottoDto);
         console.log(this.listaProdottiDto);
     }
 

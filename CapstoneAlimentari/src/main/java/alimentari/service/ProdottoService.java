@@ -157,7 +157,8 @@ public class ProdottoService {
 	// GET
 	public List<Prodotto> recuperaTuttiProdotti() {
 		try {
-			List<Prodotto> listaProdotti = prodRepo.findAll();
+//			List<Prodotto> listaProdotti = prodRepo.findAll();
+			List<Prodotto> listaProdotti = prodRepo.findAllByOrderByIdProdotto();
 			return listaProdotti;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

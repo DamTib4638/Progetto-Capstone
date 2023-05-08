@@ -17,5 +17,7 @@ public interface ScaricoRepository extends JpaRepository<Scarico, Long> {
 	Scarico findScaricoByMaxId();
 	
 	List<Scarico> findByDataRegScarIsNull();
+	
+	List<Scarico> findAllByOrderByIdScarico();
 
 }

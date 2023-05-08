@@ -135,7 +135,8 @@ public class ScaricoService {
 	// GET
 	public List<Scarico> recuperaTuttiScarichi() {
 		try {
-			List<Scarico> listaScarichi = scarRepo.findAll();
+//			List<Scarico> listaScarichi = scarRepo.findAll();
+			List<Scarico> listaScarichi = scarRepo.findAllByOrderByIdScarico();
 			return listaScarichi;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

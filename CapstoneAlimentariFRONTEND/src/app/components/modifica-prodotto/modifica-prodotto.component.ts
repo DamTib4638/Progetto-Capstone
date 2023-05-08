@@ -86,6 +86,12 @@ export class ModificaProdottoComponent implements OnInit {
                         for (let pr of this.listaProdotti) {
                             if (Number(pr.idProdotto) == id) {
                                 this.prod = pr;
+                                if (this.prod.qtaDisponibile != null && this.prod.pesoDisponibile == null && this.prod.qtaDisponibile > -1) {
+                                    this.sceltaQtaPeso = 1;
+                                }
+                                if (this.prod.pesoDisponibile != null && this.prod.qtaDisponibile == null && this.prod.pesoDisponibile > -1) {
+                                    this.sceltaQtaPeso = 2;
+                                }
                                 console.log(this.prod.scaffale);
                                 this.scaf = this.prod.scaffale;
                             }

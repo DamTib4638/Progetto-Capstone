@@ -15,5 +15,7 @@ public interface TransazioneRepository extends JpaRepository<Transazione, Long> 
 	Long findTransazioneMaxId();
 	
 	List<Transazione> findByDataPagamentoTransazioneIsNull();
+	
+	List<Transazione> findAllByOrderByIdTransazione();
 
 }

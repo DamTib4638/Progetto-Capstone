@@ -49,8 +49,8 @@
         <div class="card-body">
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('DIRETTORE')"
                 src="../../../assets/images/dipendente.jpg" alt="User" width="100">
-            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('CASSIERE')"
-                src="../../../assets/images/gavioli.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('CASSIERE') && dipendente.cognome.includes('Gavioli')" src="../../../assets/images/gavioli.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('CASSIERE') && dipendente.cognome.includes('Pastore')" src="../../../assets/images/francesco.jpg" alt="User" width="100">
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('BANCO')"
                 src="../../../assets/images/ferrucci.jpg" alt="User" width="100">
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('SCAFFALE')"

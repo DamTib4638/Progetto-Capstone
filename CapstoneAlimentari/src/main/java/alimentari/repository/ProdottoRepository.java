@@ -25,5 +25,7 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 	List<Prodotto> findByTipoProdotto(TipoProdotto tipoProdotto);
 	
 	List<Prodotto> findByPercentualeOffertaIsNotNull();
+	
+	List<Prodotto> findAllByOrderByIdProdotto();
 
 }

@@ -56,12 +56,12 @@
                 <button id="btn_01" title="Dettaglio Dipendente" class="btn btn-info me-2" [routerLink]="['/dettaglio_dipendente/' + dip.idDipendente]">
                     <i class="bi bi-arrows-fullscreen"></i>
                 </button>
-                <button id="btn_02" title="Modifica Dipendente" class="btn btn-success me-2" [routerLink]="['/modifica_dipendente/' + dip.idDipendente]">
+                <!-- <button id="btn_02" title="Modifica Dipendente" class="btn btn-warning me-2" [routerLink]="['/modifica_dipendente/' + dip.idDipendente]">
                     <i class="bi bi-pencil-square"></i>
                 </button>
                 <button *ngIf="!(dip.mansioni[0].tipoMansione.includes('DIRETTORE'))" id="btn_03" title="Elimina Dipendente" class="btn btn-danger" (click)="eliminaDipendente(dip.idDipendente)">
                     <i class="bi bi-trash3"></i>
-                </button>
+                </button> -->
             </div>
             <div *ngIf="confermaCanc && (codiceVerificaCanc == dip.idDipendente)" class="col-2">
                 <button title="Conferma eliminazione" class="btn btn-success me-2" (click)="confermaEliminazione(dip.idDipendente)">Elimina</button>

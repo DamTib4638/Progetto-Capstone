@@ -25,7 +25,7 @@ public class ContrattoController {
 	@Autowired ContrattoService contServ;
 	
 	@PostMapping
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<Contratto> inserisciContratto(@RequestBody Contratto c) {
 		if(c != null) {
 			Contratto contratto = contServ.registraContratto(c);
@@ -35,7 +35,7 @@ public class ContrattoController {
 	}
 	
 	@PutMapping("/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<Contratto> modificaContratto(@PathVariable Long id) {
 		if(id>0) {
 			Contratto contrDaModificare = contServ.recuperaContratto(id);
@@ -46,13 +46,13 @@ public class ContrattoController {
 	}
 	
 	@GetMapping
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<List<Contratto>> visualizzaTuttiContratti() {
 		return ResponseEntity.ok().body(contServ.recuperaTuttiContratti());
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('DIRETTORE')")
 	public ResponseEntity<Contratto> visualizzaContratto(@PathVariable Long id) {
 		return ResponseEntity.ok().body(contServ.recuperaContratto(id));
 	}

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import alimentari.entity.Dipendente;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DipendenteRepository extends JpaRepository<Dipendente, Long> {
@@ -17,4 +18,7 @@ public interface DipendenteRepository extends JpaRepository<Dipendente, Long> {
 //    Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+    
+    List<Dipendente> findAllByOrderByIdDipendente();
+    
 }

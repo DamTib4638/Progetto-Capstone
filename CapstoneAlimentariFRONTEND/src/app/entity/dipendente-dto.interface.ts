@@ -1,5 +1,4 @@
-export interface Dipendente {
-    idDipendente: any,
+export interface DipendenteDto {
     nome: string,
     cognome: string,
     eta: number,
@@ -9,5 +8,7 @@ export interface Dipendente {
     citta: string,
     email: string,
     password: string,
-    mansioni: any []
+    mansioni: any [],
+    contratto: string,
+    dataInizioContratto: any
 }

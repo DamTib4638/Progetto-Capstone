@@ -114,7 +114,7 @@ public class AuthServiceImpl implements AuthService {
         contrattoNuovoDip.setContratto(contrAssegnato);
         contrattoNuovoDip.setDipendente(dipendente);
         String dataIninizioContrattoStringa = registerDto.getDataInizioContratto();
-		SimpleDateFormat sdfInizio = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfInizio = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataInizio = null;
 		try {
 			dataInizio = sdfInizio.parse(dataIninizioContrattoStringa);

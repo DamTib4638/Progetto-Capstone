@@ -42,7 +42,13 @@
                 <h6>{{tran.cassa.numeroCassa}}</h6>
             </div>
             <div class="col-3" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
-                <h6>{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - {{tran.dipendente.mansioni[0].tipoMansione}}</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('DIRETTORE')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - DIRETTORE</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('BANCO')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - MAGAZZINIERE BANCO</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('SCAFFALE')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - MAGAZZINIERE SCAFFALE</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('CASSIERE')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - CASSIERE</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('RESPONSABILE')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - RESPONSABILE</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('PULIZIA')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - PULIZIA</h6>
+                <h6 *ngIf="tran.dipendente.mansioni[0].tipoMansione.includes('MANAGER')">{{tran.dipendente.cognome}} {{tran.dipendente.nome}} - MANAGER</h6>
             </div>
             <div *ngIf="(!confermaCanc && !confermaPagam) || (codiceVerificaCanc != tran.idTransazione && codiceVerificaPagam != tran.idTransazione)" class="col-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
                 <button id="btn_01" title="Dettaglio Transazione" class="btn btn-info me-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">

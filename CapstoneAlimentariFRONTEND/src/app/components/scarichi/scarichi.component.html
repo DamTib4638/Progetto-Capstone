@@ -44,7 +44,13 @@
                 <h6>{{scar.fornitore.nomeDittaFornitore}}</h6>
             </div>
             <div class="col-3" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
-                <h6>{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - {{scar.dipendente.mansioni[0].tipoMansione}}</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('DIRETTORE')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - DIRETTORE</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('BANCO')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - MAGAZZINIERE BANCO</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('SCAFFALE')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - MAGAZZINIERE SCAFFALE</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('CASSIERE')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - CASSIERE</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('RESPONSABILE')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - RESPONSABILE</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('PULIZIA')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - PULIZIA</h6>
+                <h6 *ngIf="scar.dipendente.mansioni[0].tipoMansione.includes('MANAGER')">{{scar.dipendente.cognome}} {{scar.dipendente.nome}} - MANAGER</h6>
             </div>
             <div *ngIf="(!confermaCanc && !confermaReg) || (codiceVerificaCanc != scar.idScarico && codiceVerificaReg != scar.idScarico)" class="col-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
                 <button id="btn_01" title="Dettaglio Scarico" class="btn btn-info me-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">

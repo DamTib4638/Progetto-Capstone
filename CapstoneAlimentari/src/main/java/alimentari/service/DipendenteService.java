@@ -36,7 +36,8 @@ public class DipendenteService {
 	
 	public List<Dipendente> recuperaTuttiDipendenti() {
 		try {
-			List<Dipendente> listaDipendenti = dipRepo.findAll();
+//			List<Dipendente> listaDipendenti = dipRepo.findAll();
+			List<Dipendente> listaDipendenti = dipRepo.findAllByOrderByIdDipendente();
 			return listaDipendenti;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
