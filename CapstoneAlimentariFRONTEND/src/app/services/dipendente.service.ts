@@ -11,9 +11,9 @@ import { DipendenteDto } from '../entity/dipendente-dto.interface';
 })
 export class DipendenteService {
 
-    baseUrl: string = "http://localhost:8080/api/alimentari/dipendenti";
-    registerUrl: string = 'http://localhost:8080/api/auth/alimentari/register';
-    baseUrlContratti: string = 'http://localhost:8080/api/alimentari/contratti';
+    baseUrl: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dipendenti";
+    registerUrl: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/auth/alimentari/register';
+    baseUrlContratti: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/contratti';
 
     dipInTurno = localStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';

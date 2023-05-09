@@ -10,8 +10,8 @@ import { Scaffale } from '../entity/scaffale.interface';
 })
 export class ProdottoService {
 
-    baseUrlProdotti: string = "http://localhost:8080/api/alimentari/prodotti";
-    baseUrlScaffali: string = "http://localhost:8080/api/alimentari/scaffali";
+    baseUrlProdotti: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/prodotti";
+    baseUrlScaffali: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/scaffali";
     dipInTurno = localStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
     accesso: HttpHeaders = new HttpHeaders({

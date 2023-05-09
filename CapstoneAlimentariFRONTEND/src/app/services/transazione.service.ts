@@ -12,9 +12,9 @@ import { DettaglioTransazione } from '../entity/dettaglio-transazione.interface'
 })
 export class TransazioneService {
 
-    baseUrlTransazione: string = 'http://localhost:8080/api/alimentari/transazioni';
-    baseUrlCassa: string = 'http://localhost:8080/api/alimentari/casse';
-    baseUrlDettaglioTransazione: string = 'http://localhost:8080/api/alimentari/dettaglioTransazioni';
+    baseUrlTransazione: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/transazioni';
+    baseUrlCassa: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/casse';
+    baseUrlDettaglioTransazione: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dettaglioTransazioni';
 
     dipInTurno = localStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';

@@ -22,8 +22,8 @@ export class AuthJwtService {
         'Authorization': 'Bearer' + localStorage.getItem("token")
     });
 
-    private baseUrl: string = "http://localhost:8080/api/auth/alimentari";
-    private baseUrlDip: string = "http://localhost:8080/api/alimentari/dipendenti";
+    private baseUrl: string = "https://alimentaribe.osc-fr1.scalingo.io/api/auth/alimentari";
+    private baseUrlDip: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dipendenti";
 
     isLoggedIn: boolean = false;
 

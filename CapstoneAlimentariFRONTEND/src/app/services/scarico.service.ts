@@ -12,9 +12,9 @@ import { DettaglioScarico } from '../entity/dettaglio-scarico.interface';
 })
 export class ScaricoService {
 
-    baseUrlScarico: string = 'http://localhost:8080/api/alimentari/scarichi';
-    baseUrlFornitore: string = 'http://localhost:8080/api/alimentari/fornitori';
-    baseUrlDettaglioScarico: string = 'http://localhost:8080/api/alimentari/dettaglioScarichi'
+    baseUrlScarico: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/scarichi';
+    baseUrlFornitore: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/fornitori';
+    baseUrlDettaglioScarico: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dettaglioScarichi'
 
     dipInTurno = localStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
