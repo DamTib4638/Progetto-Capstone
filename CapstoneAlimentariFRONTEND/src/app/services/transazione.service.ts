@@ -32,13 +32,13 @@ export class TransazioneService {
 
     pagaTransazione(t: Transazione) {
         return this.http.put<Transazione>(this.baseUrlTransazione + '/gestione/' + t.idTransazione, t, {headers: this.accesso}).subscribe(() => {
-            this.indietro();
+            window.location.reload();
         })
     }
 
     eliminaTransazione(t: Transazione) {
         return this.http.delete<Boolean>(this.baseUrlTransazione + '/gestione/' + t.idTransazione, {headers: this.accesso}).subscribe(() => {
-            this.indietro();
+            window.location.reload();
         })
     }
 

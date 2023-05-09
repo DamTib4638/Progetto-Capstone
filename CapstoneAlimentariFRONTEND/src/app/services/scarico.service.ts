@@ -34,14 +34,14 @@ export class ScaricoService {
     registraScarico(s: Scarico) {
         console.log(s);
         return this.http.put<Scarico>(this.baseUrlScarico + '/gestione/' + s.idScarico, s, {headers: this.accesso}).subscribe(() => {
-            this.indietro();
+            window.location.reload();
         })
     }
 
     eliminaScarico(s: Scarico) {
         console.log(s);
         return this.http.delete<Boolean>(this.baseUrlScarico + '/gestione/' + s.idScarico, {headers: this.accesso}).subscribe(() => {
-            this.indietro();
+            window.location.reload();
         })
     }
 
