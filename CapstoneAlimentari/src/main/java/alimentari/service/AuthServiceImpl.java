@@ -124,7 +124,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 		if (!(contrAssegnato.getTipoContratto().equals(TipoContratto.TEMPO_INDETERMINATO))) {
 			String dataFineContrattoStringa = registerDto.getDataFineContratto();
-			SimpleDateFormat sdfFine = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdfFine = new SimpleDateFormat("yyyy-MM-dd");
 			Date dataFine = null;
 			try {
 				dataFine = sdfFine.parse(dataFineContrattoStringa);

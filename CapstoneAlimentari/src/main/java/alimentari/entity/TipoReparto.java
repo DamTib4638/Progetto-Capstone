@@ -12,6 +12,9 @@ public enum TipoReparto {
 	CASALINGHI,
 	TEMPO_LIBERO,
 	BIO,
-	BEVANDE
+	BEVANDE,
+	BIMBI,
+	DOLCIUMI,
+	CONFEZIONI
 
 }

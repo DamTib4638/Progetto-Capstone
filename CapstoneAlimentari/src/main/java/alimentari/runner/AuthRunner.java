@@ -1,5 +1,6 @@
 package alimentari.runner;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,9 @@ public class AuthRunner implements ApplicationRunner {
 	private Set<Mansione> ruoloCassiere;
 	private Set<Mansione> ruoloMagazziniereBanco;
 	private Set<Mansione> ruoloMagazziniereScaffale;
+	private Set<Mansione> ruoloManager;
+	private Set<Mansione> ruoloPulizia;
+	private Set<Mansione> ruoloResponsabile;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -51,6 +55,18 @@ public class AuthRunner implements ApplicationRunner {
 //		userRepository.save(dipCassiere2);
 //		dipCassiere2.setMansioni(ruoloCas);
 		
+		List<Mansione> listaMansioniPresenti = new ArrayList<Mansione>();
+		List<Dipendente> listaDipendentiPresenti = new ArrayList<Dipendente>();
+		System.out.println(listaMansioniPresenti.size());
+		System.out.println(listaDipendentiPresenti.size());
+		listaMansioniPresenti = roleRepository.findAll();
+		listaDipendentiPresenti = userRepository.findAll();
+		System.out.println(listaMansioniPresenti.size());
+		System.out.println(listaDipendentiPresenti.size());
+		if (listaDipendentiPresenti.size() <= 0 && listaMansioniPresenti.size() <= 0) {
+			setRoleDefault();
+			setUserDefault();
+		}
 		
 //		setRoleDefault();
 //		setUserDefault();
@@ -60,34 +76,34 @@ public class AuthRunner implements ApplicationRunner {
 	private void setRoleDefault() {
 		Mansione direttore = new Mansione();
 		direttore.setTipoMansione(TipoMansione.ROLE_DIRETTORE);
-//		roleRepository.save(direttore);
+		roleRepository.save(direttore);
 		
 		Mansione cassiere = new Mansione();
 		cassiere.setTipoMansione(TipoMansione.ROLE_CASSIERE);
-//		roleRepository.save(cassiere);
+		roleRepository.save(cassiere);
 		
 		Mansione magazziniereScaf = new Mansione();
 		magazziniereScaf.setTipoMansione(TipoMansione.ROLE_MAGAZZINIERE_SCAFFALE);
-//		roleRepository.save(magazziniereScaf);
+		roleRepository.save(magazziniereScaf);
 		
 		
 		
 		// INSERISCI QUI LE NUOVE MANSIONI DI DEFAULT DA SALVARE NEL DB, COMMENTANDO TUTTO IL RESTO DEL METODO.
 		Mansione magazziniereBanco = new Mansione();
 		magazziniereBanco.setTipoMansione(TipoMansione.ROLE_MAGAZZINIERE_BANCO);
-//		roleRepository.save(magazziniereBanco);
+		roleRepository.save(magazziniereBanco);
 		
-//		Mansione responsabile = new Mansione();
-//		responsabile.setTipoMansione(TipoMansione.ROLE_RESPONSABILE);
-//		roleRepository.save(responsabile);
+		Mansione responsabile = new Mansione();
+		responsabile.setTipoMansione(TipoMansione.ROLE_RESPONSABILE);
+		roleRepository.save(responsabile);
 		
-//		Mansione pulizia = new Mansione();
-//		pulizia.setTipoMansione(TipoMansione.ROLE_PULIZIA);
-//		roleRepository.save(pulizia);
+		Mansione pulizia = new Mansione();
+		pulizia.setTipoMansione(TipoMansione.ROLE_PULIZIA);
+		roleRepository.save(pulizia);
 		
-//		Mansione manager = new Mansione();
-//		manager.setTipoMansione(TipoMansione.ROLE_MANAGER);
-//		roleRepository.save(manager);
+		Mansione manager = new Mansione();
+		manager.setTipoMansione(TipoMansione.ROLE_MANAGER);
+		roleRepository.save(manager);
 		
 		
 		ruoloDirettore = new HashSet<Mansione>();
@@ -102,9 +118,20 @@ public class AuthRunner implements ApplicationRunner {
 		ruoloCassiere.add(cassiere);
 		
 		ruoloMagazziniereBanco = new HashSet<Mansione>();
+		ruoloMagazziniereBanco.add(magazziniereBanco);
+		
 		ruoloMagazziniereScaffale = new HashSet<Mansione>();
 		ruoloMagazziniereScaffale.add(magazziniereScaf);
-		ruoloMagazziniereBanco.add(magazziniereBanco);
+		
+		ruoloManager = new HashSet<Mansione>();
+		ruoloManager.add(manager);
+		
+		ruoloPulizia = new HashSet<Mansione>();
+		ruoloPulizia.add(pulizia);
+		
+		ruoloResponsabile = new HashSet<Mansione>();
+		ruoloResponsabile.add(responsabile);
+		
 	}
 	
 	private void setUserDefault() {
@@ -131,6 +158,24 @@ public class AuthRunner implements ApplicationRunner {
 						.collect(Collectors.toList())
 				);
 		
+		Set<String> ruoloManag = new HashSet<>(
+				ruoloManager.stream()
+						.map(r -> r.getTipoMansione().toString())
+						.collect(Collectors.toList())
+				);
+		
+		Set<String> ruoloPul = new HashSet<>(
+				ruoloPulizia.stream()
+						.map(r -> r.getTipoMansione().toString())
+						.collect(Collectors.toList())
+				);
+		
+		Set<String> ruoloResp = new HashSet<>(
+				ruoloResponsabile.stream()
+						.map(r -> r.getTipoMansione().toString())
+						.collect(Collectors.toList())
+				);
+		
 		
 		RegisterDto dipDirettore = new RegisterDto();
 		dipDirettore.setNome("Damiano");
@@ -144,7 +189,7 @@ public class AuthRunner implements ApplicationRunner {
 		dipDirettore.setPassword("direttore");
 		dipDirettore.setMansioni(ruoloDir);
 		dipDirettore.setContratto("TEMPO_INDETERMINATO");
-		dipDirettore.setDataInizioContratto("03/04/2023");
+		dipDirettore.setDataInizioContratto("2023-04-03");
 		System.out.println(authService.register(dipDirettore));
 		
 		RegisterDto dipCassiere = new RegisterDto();
@@ -159,8 +204,23 @@ public class AuthRunner implements ApplicationRunner {
 		dipCassiere.setPassword("cassiere");
 		dipCassiere.setMansioni(ruoloCas);
 		dipCassiere.setContratto("TEMPO_INDETERMINATO");
-		dipCassiere.setDataInizioContratto("10/04/2023");
+		dipCassiere.setDataInizioContratto("2023-04-10");
 		System.out.println(authService.register(dipCassiere));
+		
+		RegisterDto dipCassiere2 = new RegisterDto();
+		dipCassiere2.setNome("Stefano");
+		dipCassiere2.setCognome("Violi");
+		dipCassiere2.setCodFis("VLISTF0004A");
+		dipCassiere2.setEta(35);
+		dipCassiere2.setCitta("Maranello");
+		dipCassiere2.setIndirizzo("Via Parabolica 35");
+		dipCassiere2.setTelefono("+393377777777");
+		dipCassiere2.setEmail("cassiere2.cassiere2@gmail.com");
+		dipCassiere2.setPassword("cassiere2");
+		dipCassiere2.setMansioni(ruoloCas);
+		dipCassiere2.setContratto("TEMPO_INDETERMINATO");
+		dipCassiere2.setDataInizioContratto("2023-05-09");
+		System.out.println(authService.register(dipCassiere2));
 		
 		RegisterDto dipMagazziniereBanco = new RegisterDto();
 		dipMagazziniereBanco.setNome("Manuel");
@@ -174,7 +234,7 @@ public class AuthRunner implements ApplicationRunner {
 		dipMagazziniereBanco.setPassword("banco");
 		dipMagazziniereBanco.setMansioni(ruoloMagBanco);
 		dipMagazziniereBanco.setContratto("TEMPO_INDETERMINATO");
-		dipMagazziniereBanco.setDataInizioContratto("15/04/2023");
+		dipMagazziniereBanco.setDataInizioContratto("2023-04-15");
 		System.out.println(authService.register(dipMagazziniereBanco));
 		
 		RegisterDto dipMagazziniereScaffale = new RegisterDto();
@@ -189,7 +249,7 @@ public class AuthRunner implements ApplicationRunner {
 		dipMagazziniereScaffale.setPassword("scaffale");
 		dipMagazziniereScaffale.setMansioni(ruoloMagScaf);
 		dipMagazziniereScaffale.setContratto("TEMPO_INDETERMINATO");
-		dipMagazziniereScaffale.setDataInizioContratto("12/04/2023");
+		dipMagazziniereScaffale.setDataInizioContratto("2023-04-12");
 		System.out.println(authService.register(dipMagazziniereScaffale));
 		
 	}

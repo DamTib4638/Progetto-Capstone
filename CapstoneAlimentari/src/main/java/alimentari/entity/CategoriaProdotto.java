@@ -16,6 +16,7 @@ public enum CategoriaProdotto {
 	CURA_CASA,
 	ANIMALI,
 	HOBBY,
-	SPECIAL
+	SPECIAL,
+	BIMBO
 
 }

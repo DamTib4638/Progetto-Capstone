@@ -1,5 +1,8 @@
 package alimentari.runner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -20,6 +23,13 @@ public class RepartoRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		
 		System.out.println("Reparto run..");
+		List<Reparto> listaRepartiPresenti = new ArrayList<Reparto>();
+		System.out.println(listaRepartiPresenti.size());
+		listaRepartiPresenti = repaServ.recuperaTuttiReparti();
+		System.out.println(listaRepartiPresenti.size());
+		if (listaRepartiPresenti.size() <= 0) {
+			setReparti();
+		}
 //		setReparti();
 		
 	}
@@ -85,6 +95,30 @@ public class RepartoRunner implements ApplicationRunner {
 			.descrizione("Fanno parte del reparto TEMPO LIBERO i seguenti prodotti: Giochi, Articoli sportivi, Articoli da giardino, Articoli da bricolage, Libri, Riviste e Abbonamenti per Pay-TV.")
 			.build();
 		repaServ.registraReparto(tempoLibero);
+		
+		Reparto bevande = Reparto.builder()
+			.tipoReparto(TipoReparto.BEVANDE)
+			.descrizione("Fanno parte del reparto BEVANDE i seguenti prodotti: Acqua, Succhi di Frutta, The, Bibite Gassate, Vini, Birre, Liquori e, in generale, qualsiasi bevanda alcolica o analcolica.")
+			.build();
+		repaServ.registraReparto(bevande);
+		
+		Reparto bimbi = Reparto.builder()
+			.tipoReparto(TipoReparto.BIMBI)
+			.descrizione("Fanno parte del reparto BIMBI i seguenti prodotti: Alimenti, Abbigliamento, Giocattoli, Accessori per neonati e prima infanzia, Prodotti per l'intimo e l'igiene personale di neonati e prima infanzia.")
+			.build();
+		repaServ.registraReparto(bimbi);
+			
+		Reparto dolciumi = Reparto.builder()
+			.tipoReparto(TipoReparto.DOLCIUMI)
+			.descrizione("Fanno parte del reparto DOLCIUMI i seguenti prodotti: Cioccolato, Caramelle, Gomme da masticare, Dolci da forno, Biscotti, Merendine, Creme spalmabili e ingredienti per preparare dolci.")
+			.build();
+		repaServ.registraReparto(dolciumi);
+				
+		Reparto confezioni = Reparto.builder()
+			.tipoReparto(TipoReparto.CONFEZIONI)
+			.descrizione("Fanno parte del reparto CONFEZIONI i seguenti prodotti: Pasta, Riso, Cereali, Legumi, Sughi, Condimenti, Uova e, in generale, prodotti confezionati vendibili singolarmente.")
+			.build();
+		repaServ.registraReparto(confezioni);
 		
 	}
 

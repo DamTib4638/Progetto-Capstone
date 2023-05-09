@@ -1,5 +1,6 @@
 package alimentari.runner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class ScaffaleRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		
 		System.out.println("Scaffale scappa e cade");
+		List<Scaffale> listaScaffaliPresenti = new ArrayList<Scaffale>();
+		System.out.println(listaScaffaliPresenti.size());
+		listaScaffaliPresenti = scafServ.recuperaTuttiScaffali();
+		System.out.println(listaScaffaliPresenti.size());
+		if (listaScaffaliPresenti.size() <= 0) {
+			setScaffali();
+		}
 //		setScaffali();
 		
 	}

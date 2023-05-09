@@ -1,5 +1,8 @@
 package alimentari.runner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,6 +22,13 @@ public class CassaRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		
 		System.out.println("cassa.exe");
+		List<Cassa> listaCassePresenti = new ArrayList<Cassa>();
+		System.out.println(listaCassePresenti.size());
+		listaCassePresenti = cassaServ.recuperaTutteCasse();
+		System.out.println(listaCassePresenti.size());
+		if (listaCassePresenti.size() <= 0) {
+			setCasse();
+		}
 //		setCasse();
 		
 	}

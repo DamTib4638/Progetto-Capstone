@@ -1,6 +1,8 @@
 package alimentari.runner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -21,6 +23,13 @@ public class FornitoreRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		
 		System.out.println("fornitore corre su gomma");
+		List<Fornitore> listaFornitoriPresenti = new ArrayList<Fornitore>();
+		System.out.println(listaFornitoriPresenti.size());
+		listaFornitoriPresenti = fornServ.recuperaTuttiFornitori();
+		System.out.println(listaFornitoriPresenti.size());
+		if (listaFornitoriPresenti.size() <= 0) {
+			setFornitori();
+		}
 //		setFornitori();
 		
 	}

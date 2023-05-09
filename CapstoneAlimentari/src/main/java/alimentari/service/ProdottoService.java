@@ -34,6 +34,7 @@ public class ProdottoService {
 				
 				if (prodotto.getIdProdotto() == null) {
 					prodRepo.save(prodotto);
+					System.out.println("Prodotto inserito!");
 					return prodotto;
 				} else {
 					
