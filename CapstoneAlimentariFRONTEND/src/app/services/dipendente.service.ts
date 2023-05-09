@@ -79,7 +79,7 @@ export class DipendenteService {
     }
 
     indietro() {
-        window.location.href = 'dipendenti';
+        window.location.href = '#/dipendenti';
         // this.router.navigate(['/welcome']);
     }
 

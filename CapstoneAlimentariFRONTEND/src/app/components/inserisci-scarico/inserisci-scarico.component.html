@@ -25,7 +25,7 @@
     <!-- (ngSubmit)="newScarico.valid && aggiungiProdottoDto(newScarico)" -->
     <form #newScarico="ngForm">
         <div class="row pb-3 align-items-center border border-start-0 border-end-0 border-bottom-0">
-            <div class="col-sm-6 offset-3 text-center">
+            <div class="col-sm-6 offset-3 text-center mb-3">
                 <label class="form-label" for="idProdotto">Prodotti *</label>
                 <select class="form-select mb-3" id="idProdotto" name="idProdotto" ngModel #idProdotto="ngModel" required>
                     <option value="">--</option>
@@ -50,7 +50,7 @@
             *ngIf="idProdotto.invalid && (idProdotto.dirty || idProdotto.touched) && listaProdottiDto.length < 1">
             Si deve aggiungere ALMENO 1 PRODOTTO per effettuare un rifornimento.
         </span>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
             <button class="btn btn-info text-white" (click)="insert()"
                 [disabled]="newScarico.invalid || fornitoreScelto.invalid || listaProdottiDto.length < 1 || fornitore.idFornitore < 1 || fornitore.idFornitore!=fornitoreScelto.value.idFornitore">Invia Prenotazione Scarico

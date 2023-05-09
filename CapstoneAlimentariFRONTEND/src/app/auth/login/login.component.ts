@@ -30,13 +30,11 @@ export class LoginComponent implements OnInit {
         if (formLogin.value.email != null && formLogin.value.password != null) {
             this.login.email = formLogin.value.email;
             this.login.password = formLogin.value.password;
-            console.log(this.login.email);
             this.authServ.login(this.login).subscribe((data) => {
-                window.location.href = 'welcome';
+                window.location.href = '#/welcome';
                 // this.route.navigate(['welcome']);
-                console.log('success', data);
                 this.mail = data.email;
-
+                this.reloadPage();
             },
             (error) => {
                 console.log('Login non andato a buon fine', error);

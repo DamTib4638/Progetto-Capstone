@@ -20,14 +20,12 @@
         <div class="card-body">
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('DIRETTORE')"
                 src="../../../assets/images/dipendente.jpg" alt="User" width="100">
-            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('CASSIERE') && dipendente.cognome.includes('Gavioli')"
-                src="../../../assets/images/gavioli.jpg" alt="User" width="100">
-            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('CASSIERE') && dipendente.cognome.includes('Pastore')"
-                src="../../../assets/images/francesco.jpg" alt="User" width="100">
-            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('BANCO')"
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="dipendente.cognome.includes('Gavioli')" src="../../../assets/images/gavioli.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="dipendente.cognome.includes('Pastore')" src="../../../assets/images/francesco.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="dipendente.cognome.includes('Ferrucci')"
                 src="../../../assets/images/ferrucci.jpg" alt="User" width="100">
-            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="ruolo.includes('SCAFFALE')"
-                src="../../../assets/images/violi.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="dipendente.cognome.includes('Violi') && dipendente.nome.includes('Stefano')" src="../../../assets/images/violi.jpg" alt="User" width="100">
+            <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="!dipendente.cognome.includes('Violi') && !dipendente.cognome.includes('Gavioli') && !dipendente.cognome.includes('Ferrucci') && !dipendente.cognome.includes('Pastore') && !ruolo.includes('DIRETTORE')" src="../../../assets/images/offline_dipendente.png" alt="User" width="100">
             <h3 class="card-text text-center text-warning">Contatti Dipendente</h3>
             <h3 class="card-text text-center text-info">Email: {{ dipendente.email }}</h3>
             <h3 class="card-text text-center text-info">Telefono: {{dipendente.telefono}}</h3>

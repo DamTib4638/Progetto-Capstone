@@ -76,15 +76,17 @@
                                 *ngIf="authServ.isDipLoggedIn() && mansioni.includes('DIRETTORE')"
                                 src="../../../assets/images/dipendente.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
-                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE')) && cognomeDipLoggato.includes('Pastore')" src="../../../assets/images/francesco.jpg" alt="User" width="40" height="50">
+                                *ngIf="authServ.isDipLoggedIn() && cognomeDipLoggato.includes('Pastore')" src="../../../assets/images/francesco.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
-                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('CASSIERE')) && cognomeDipLoggato.includes('Gavioli')" src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
+                                *ngIf="authServ.isDipLoggedIn() && cognomeDipLoggato.includes('Gavioli')" src="../../../assets/images/gavioli.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
-                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('BANCO'))"
+                                *ngIf="authServ.isDipLoggedIn() && cognomeDipLoggato.includes('Ferrucci')"
                                 src="../../../assets/images/ferrucci.jpg" alt="User" width="40" height="50">
                             <img class="img-fluid rounded-circle"
-                                *ngIf="authServ.isDipLoggedIn() && (mansioni.includes('SCAFFALE'))"
+                                *ngIf="authServ.isDipLoggedIn() && cognomeDipLoggato.includes('Violi') && nomeDipLoggato.includes('Stefano')"
                                 src="../../../assets/images/violi.jpg" alt="User" width="40" height="50">
+                            <img class="img-fluid rounded-circle" *ngIf="authServ.isDipLoggedIn() && !cognomeDipLoggato.includes('Violi') && !cognomeDipLoggato.includes('Gavioli') && !cognomeDipLoggato.includes('Ferrucci') && !cognomeDipLoggato.includes('Pastore') && !mansioni.includes('DIRETTORE')"
+                                src="../../../assets/images/offline_dipendente.png" alt="User" width="35" height="35">
                             <img class="img-fluid rounded-circle" *ngIf="!authServ.isDipLoggedIn()"
                                 src="../../../assets/images/offline_dipendente.png" alt="User" width="35" height="35">
                         </a>

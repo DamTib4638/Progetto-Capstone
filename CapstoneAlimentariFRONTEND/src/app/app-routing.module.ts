@@ -23,7 +23,7 @@ import { DettaglioDipendenteComponent } from './components/dettaglio-dipendente/
 import { ModificaDipendenteComponent } from './components/modifica-dipendente/modifica-dipendente.component';
 
 const routes: Routes = [
-    {path:'', component: LoginComponent},
+    {path:'', component: WelcomeComponent},
     {path:'forbidden', component: AccessoVietatoComponent},
     {path:'login', component: LoginComponent},
     {path:'welcome', component: WelcomeComponent},
@@ -50,7 +50,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -51,7 +51,7 @@
             *ngIf="idProdotto.invalid && (idProdotto.dirty || idProdotto.touched) && listaProdottiDto.length < 1">
             Si deve aggiungere ALMENO 1 PRODOTTO per effettuare una transazione.
         </span>
-        <div class="d-flex justify-content-center mt-2">
+        <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
             <button class="btn btn-info text-white" (click)="insert()"
                 [disabled]="newTransazione.invalid || cassaScelta.invalid || listaProdottiDto.length < 1 || cassa.idCassa < 1 || cassa.idCassa!=cassaScelta.value.idCassa">Invia Nuova Transazione
