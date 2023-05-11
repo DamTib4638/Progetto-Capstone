@@ -31,7 +31,7 @@
 <div class="d-flex flex-column align-items-center">
     <h1 class="text-center mt-2" id="titolo_edit">Buon Lavoro!</h1>
     <div *ngIf="dipendente" class="card w-50 m-3 contenitore_card">
-        <div class="card-header fw-bolder bg-dark text-warning">
+        <div class="card-header text-center fw-bolder bg-dark text-warning">
             Dipendente N°: {{ dipendente.idDipendente}} - Nominativo: {{dipendente.cognome}} {{dipendente.nome}} -
             Ruolo:
             <span *ngIf="ruolo.includes('DIRETTORE')" class="bg-transparent text-warning fw-bolder">Direttore</span>
@@ -54,8 +54,8 @@
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="dipendente.cognome.includes('Violi') && dipendente.nome.includes('Stefano')" src="../../../assets/images/violi.jpg" alt="User" width="100">
             <img class="img-fluid mx-auto d-block rounded-circle my-3" *ngIf="!dipendente.cognome.includes('Violi') && !dipendente.cognome.includes('Gavioli') && !dipendente.cognome.includes('Ferrucci') && !dipendente.cognome.includes('Pastore') && !ruolo.includes('DIRETTORE')" src="../../../assets/images/offline_dipendente.png" alt="User" width="100">
             <h3 class="card-text text-center text-warning">Contatti Dipendente</h3>
-            <h3 class="card-text text-center text-info">Email: {{ dipendente.email }}</h3>
-            <h3 class="card-text text-center text-info">Telefono: {{dipendente.telefono}}</h3>
+            <div class="card-text text-center"><h3 class="d-inline">Email: </h3><h3 class="coloriMenu d-inline"> {{ dipendente.email }}</h3></div>
+            <div class="card-text text-center"><h3 class="d-inline">Telefono: </h3><h3 class="coloriMenu d-inline"> {{ dipendente.telefono }}</h3></div>
             <h6 class="card-text text-center text-warning">Dettagli Dipendente</h6>
             <h6 class="card-text text-center">Codice Fiscale: {{ dipendente.codFis }} - Età: {{dipendente.eta}}</h6>
             <h6 class="card-text text-center">Indirizzo: {{ dipendente.indirizzo }} - Città: {{dipendente.citta}}</h6>

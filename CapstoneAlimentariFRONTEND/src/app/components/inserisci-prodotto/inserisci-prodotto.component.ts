@@ -31,7 +31,7 @@ export class InserisciProdottoComponent implements OnInit {
         mansioni: []
     };
 
-    sceltaQtaPeso: number = 0;
+    sceltaQtaPeso: number = -1;
 
     scaf: Scaffale = {
         idScaffale: 0,

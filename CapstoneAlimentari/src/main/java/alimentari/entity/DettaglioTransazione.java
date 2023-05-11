@@ -35,6 +35,10 @@ public class DettaglioTransazione {
 	@Min(0)
 	private Double prezzoVendita;
 	
+	@Column(nullable = false)
+	@Min(0)
+	private Double prezzoUnitario;
+	
 	@ManyToOne
 	@JoinColumn(name = "idTransazione")
 	private Transazione transazione;

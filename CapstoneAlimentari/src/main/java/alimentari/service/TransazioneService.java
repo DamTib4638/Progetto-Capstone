@@ -55,6 +55,7 @@ public class TransazioneService {
 					nuovoDettaglioTransazione.setTransazione(ultimaTran);
 					nuovoDettaglioTransazione.setProdotto(prodSelezionato);
 					nuovoDettaglioTransazione.setPrezzoVendita(prodSelezionato.getPrezzoVenditaUnitario()*p.getQuantita());
+					nuovoDettaglioTransazione.setPrezzoUnitario(prodSelezionato.getPrezzoVenditaUnitario());
 					if (prodSelezionato.getPesoDisponibile() != null) {
 						nuovoDettaglioTransazione.setPesoVendita(p.getQuantita());
 						dettTranRepo.save(nuovoDettaglioTransazione);
@@ -78,7 +79,7 @@ public class TransazioneService {
 	// PUT SU TRANSAZIONE E SU PRODOTTO
 	public Boolean registraProdottiVenduti(Long id) {
 		try {
-			ProdottoService ps = new ProdottoService();
+//			ProdottoService ps = new ProdottoService();
 			Transazione transazione = tranRepo.findById(id).get();
 			transazione.setDataPagamentoTransazione(new Date());
 			tranRepo.save(transazione);

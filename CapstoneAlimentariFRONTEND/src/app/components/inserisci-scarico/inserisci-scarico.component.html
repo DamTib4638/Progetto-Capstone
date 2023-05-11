@@ -5,11 +5,11 @@
             <div class="col-sm-6 offset-3 text-center">
                 <label class="form-label" for="idFornitore">Fornitore *</label>
                 <select class="form-select mb-3" name="idFornitore" ngModel #idFornitore="ngModel" required>
-                    <option value="">--</option>
+                    <option value=""></option>
                     <option *ngFor="let fornitore of listaFornitori" value="{{fornitore.idFornitore}}">
                         {{fornitore.idFornitore}} - {{fornitore.nomeDittaFornitore}}</option>
                 </select>
-                <span class="text-info bg-transparent d-block"
+                <span class="text-info bg-transparent d-block pb-3"
                     *ngIf="idFornitore.invalid && (idFornitore.dirty || idFornitore.touched)">
                     Il Fornitore a cui assegnare il nuovo Scarico merci è OBBLIGATORIO
                 </span>
@@ -18,17 +18,17 @@
             </div>
         </div>
         <div *ngIf="fornitoreScelto.valid && fornitore.idFornitore==fornitoreScelto.value.idFornitore && fornitore.idFornitore>0"
-            class="d-flex justify-content-center mt-2 align-items-center">
+            class="d-flex justify-content-center pb-3 align-items-center">
             <label>CODICE FORNITORE SCELTO: {{fornitore.idFornitore}}</label>
         </div>
     </form>
     <!-- (ngSubmit)="newScarico.valid && aggiungiProdottoDto(newScarico)" -->
     <form #newScarico="ngForm">
-        <div class="row pb-3 align-items-center border border-start-0 border-end-0 border-bottom-0">
+        <div class="row pt-3 align-items-center border border-start-0 border-end-0 border-bottom-0">
             <div class="col-sm-6 offset-3 text-center mb-3">
                 <label class="form-label" for="idProdotto">Prodotti *</label>
                 <select class="form-select mb-3" id="idProdotto" name="idProdotto" ngModel #idProdotto="ngModel" required>
-                    <option value="">--</option>
+                    <option value=""></option>
                     <option *ngFor="let prod of listaProdotti" value="{{prod.idProdotto}}">
                         {{prod.idProdotto}} - {{prod.nome}}</option>
                 </select>
@@ -41,15 +41,17 @@
             </div>
         </div>
     </form>
-    <div class="row py-3 border border-start-0 border-end-0 border-bottom-0">
-        <div *ngFor="let prDto of listaProdottiDto" class="d-flex justify-content-center align-items-center mt-2">
+    <div class="row">
+        <div *ngFor="let prDto of listaProdottiDto" class="d-flex justify-content-center align-items-center mb-3">
             <label class="me-5">ID: {{prDto.idProdotto}} - QUANTITà: {{prDto.quantita}}</label>
             <button class="btn btn-danger me-3 text-white" (click)="eliminaProdottoDto(prDto.idProdotto)">Elimina</button>
         </div>
-        <span class="text-info bg-transparent d-block text-center"
+        <span class="text-info bg-transparent d-block text-center pb-4"
             *ngIf="idProdotto.invalid && (idProdotto.dirty || idProdotto.touched) && listaProdottiDto.length < 1">
             Si deve aggiungere ALMENO 1 PRODOTTO per effettuare un rifornimento.
         </span>
+    </div>
+    <div class="row py-3 border border-start-0 border-end-0 border-bottom-0">
         <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
             <button class="btn btn-info text-white" (click)="insert()"

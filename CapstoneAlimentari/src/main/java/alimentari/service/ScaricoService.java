@@ -63,6 +63,7 @@ public class ScaricoService {
 					nuovoDettaglioScarico.setScarico(ultimoScarico);
 					nuovoDettaglioScarico.setProdotto(prodSelezionato);
 					nuovoDettaglioScarico.setPrezzoAcquisto(prodSelezionato.getPrezzoAcquistoUnitario()*p.getQuantita());
+					nuovoDettaglioScarico.setPrezzoUnitario(prodSelezionato.getPrezzoAcquistoUnitario());
 					if (prodSelezionato.getPesoDisponibile() != null) {
 						nuovoDettaglioScarico.setPesoAcquisto(p.getQuantita());
 						dettScarRepo.save(nuovoDettaglioScarico);
@@ -87,7 +88,7 @@ public class ScaricoService {
 	public Boolean registraProdottiScarico(Long id) {
 		try {
 			System.out.println("Id Scarico riga 89 in scarico service " + id);
-			ProdottoService ps = new ProdottoService();
+//			ProdottoService ps = new ProdottoService();
 			Scarico scaricoDaRegistrare = scarRepo.findById(id).get();
 			scaricoDaRegistrare.setDataRegScar(new Date());
 			scarRepo.save(scaricoDaRegistrare);

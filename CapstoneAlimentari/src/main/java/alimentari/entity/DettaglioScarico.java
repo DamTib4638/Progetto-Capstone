@@ -35,6 +35,10 @@ public class DettaglioScarico {
 	@Min(0)
 	private Double prezzoAcquisto;
 	
+	@Column(nullable = false)
+	@Min(0)
+	private Double prezzoUnitario;
+	
 	@ManyToOne
 	@JoinColumn(name = "idScarico")
 	private Scarico scarico;
