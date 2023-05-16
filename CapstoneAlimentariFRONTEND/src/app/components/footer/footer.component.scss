@@ -16,3 +16,27 @@ nav {
 .coloriMenu:hover {
     color: white;
 }
+
+#spanFooterGrande {
+    display: block;
+    font-size: 1.1em;
+    @media screen and (max-width: 547px) {
+        display: none;
+    }
+}
+
+#spanFooterPiccolo {
+    display: none;
+    @media screen and (max-width: 547px) {
+        display: block;
+        font-size: 0.9em;
+    }
+}
+
+h4 {
+    font-size: 1.5em;
+    vertical-align: middle;
+    @media screen and (max-width: 547px) {
+        font-size: 1.2em;
+    }
+}

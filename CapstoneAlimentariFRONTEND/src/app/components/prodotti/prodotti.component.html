@@ -5,7 +5,7 @@
             <!-- <div class="col-lg-4 col-md-6 me-auto">
                 <input name="testo" id="testo" type="text" placeholder="Da Implementare..." (keyup)="cercaProd()" class="form-control" [(ngModel)]="testo">
             </div> -->
-            <div *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" class="col-lg-2 col-6 col-md-3">
+            <div *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" class="col-8 col-md-3">
                 <button title="Inserisci Nuovo Prodotto" class="btn btn-success rounded-5 w-100" (click)="nuovoProdotto()">
                     <i class="bi bi-plus-lg"><span>Nuovo Prodotto</span></i>
                 </button>

@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center">
         <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Prodotto</h1>
-        <button class="btn btn-info text-white ms-5 mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
-        <div *ngIf="prod" class="card w-50 m-3 contenitore_card">
+        <button class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
+        <div *ngIf="prod" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
             <div class="card-header fw-bolder text-center bg-dark text-warning">Codice Prodotto {{ prod.idProdotto}}</div>
             <div class="card-body">
                 <h4 class="card-text text-center coloriMenu">Nome prodotto: {{ prod.nome }} - Marca: {{ prod.marca }}</h4>
@@ -15,14 +15,3 @@
             </div>
         </div>
 </div>
-
-
-
-<!-- tipoProdotto: '',
-        categoriaProdotto: '',
-        dataScadenza: new Date(9999, 12, 31),
-        qtaDisponibile: 0,
-        pesoDisponibile: 0,
-        prezzoAcquistoUnitario: 0,
-        prezzoVenditaUnitario: 0,
-        percentualeOfferta: 0, -->

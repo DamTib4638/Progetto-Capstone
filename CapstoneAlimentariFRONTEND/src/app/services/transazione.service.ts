@@ -94,7 +94,7 @@ export class TransazioneService {
     }
 
     indietro() {
-        window.location.href = '#/transazioni';
+        window.location.href = 'transazioni';
     }
 
 }

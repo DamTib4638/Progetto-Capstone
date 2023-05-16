@@ -31,10 +31,12 @@ export class LoginComponent implements OnInit {
             this.login.email = formLogin.value.email;
             this.login.password = formLogin.value.password;
             this.authServ.login(this.login).subscribe((data) => {
-                window.location.href = '#/welcome';
-                // this.route.navigate(['welcome']);
+                // window.location.href = 'welcome';
+                // this.route.navigate(['/welcome']);
                 this.mail = data.email;
-                this.reloadPage();
+                // this.reloadPage();
+                // this.route.navigate(['/welcome']);
+                window.location.href = 'welcome';
             },
             (error) => {
                 console.log('Login non andato a buon fine', error);

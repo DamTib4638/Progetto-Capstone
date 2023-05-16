@@ -97,7 +97,7 @@ export class ScaricoService {
     }
 
     indietro() {
-        window.location.href = '#/scarichi';
+        window.location.href = 'scarichi';
         // this.router.navigate(['/scarichi']);
     }
 

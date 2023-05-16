@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center">
     <h1 class="text-center mt-2">Dettaglio Transazione</h1>
-    <button class="btn btn-info text-white ms-5 mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
-    <div *ngIf="transazione" class="card w-50 m-3 contenitore_card">
+    <button class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
+    <div *ngIf="transazione" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
         <div class="card-header fw-bolder bg-dark text-center text-warning">
             Codice Transazione: {{transazione.idTransazione}} - Cassa N°: {{transazione.cassa.numeroCassa}} - Dipendente: {{transazione.dipendente.cognome}} {{transazione.dipendente.nome}}
         </div>

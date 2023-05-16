@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg border-bottom">
     <div class="container-fluid p-0">
-        <a class="ms-5 me-3" [routerLink]="['/welcome']" *ngIf="authServ.isDipLoggedIn()"><img width="76" height="76"
+        <a class="ms-2 ms-lg-5 me-lg-3" [routerLink]="['/welcome']" *ngIf="authServ.isDipLoggedIn()"><img width="76" height="76"
                 src="../../../assets/images/piccol.jpg" alt="Solo se la foto se la sente..."></a>
-        <a class="ms-5 me-3" [routerLink]="['/login']" *ngIf="!authServ.isDipLoggedIn()"><img width="76" height="76"
+        <a class="ms-2 ms-lg-5 me-lg-3" [routerLink]="['/login']" *ngIf="!authServ.isDipLoggedIn()"><img width="76" height="76"
                 src="../../../assets/images/piccol.jpg" alt="Solo se la foto se la sente..."></a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
                 <li class="nav-item">
                     <a *ngIf="authServ.isDipLoggedIn()" class="nav-link coloriMenu" aria-current="page"
                         routerLink="/welcome"><i class="bi bi-house-fill"></i> Home</a>
@@ -68,8 +68,8 @@
             </form> -->
 
 
-            <div class="col-nav pe-5">
-                <ul class="nav">
+            <div class="col-nav me-lg-5 me-2">
+                <ul class="nav justify-content-end">
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle coloriMenu" data-bs-toggle="dropdown" href="#">
                             <img class="img-fluid rounded-circle"

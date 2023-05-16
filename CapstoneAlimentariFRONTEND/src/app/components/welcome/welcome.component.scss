@@ -6,3 +6,21 @@
 .coloriMenu {
     color: #03e9f4;
 }
+
+h3 {
+    @media screen and (max-width: 547px) {
+        font-size: 1em;
+    }
+}
+
+h6 {
+    @media screen and (max-width: 547px) {
+        font-size: 0.8em;
+    }
+}
+
+.testo, .testo span {
+    @media screen and (max-width: 547px) {
+        font-size: 0.9em;
+    }
+}
