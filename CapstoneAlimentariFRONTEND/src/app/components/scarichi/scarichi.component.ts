@@ -55,9 +55,7 @@ export class ScarichiComponent implements OnInit {
         this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
             this.dipendente = ris;
             this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-            console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('MAGAZZINIERE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaScarichi();
@@ -68,7 +66,6 @@ export class ScarichiComponent implements OnInit {
 
   visualizzaListaScarichi() {
     this.scarServ.getAllScarichi().subscribe((response) => {
-        console.log(response);
         this.listaScarichi = response;
     })
   }

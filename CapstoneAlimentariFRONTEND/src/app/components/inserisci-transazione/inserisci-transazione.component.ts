@@ -74,7 +74,6 @@ export class InserisciTransazioneComponent implements OnInit {
                 this.dipendente = ris;
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
                 if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('CASSIERE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaCasse();
@@ -100,22 +99,11 @@ export class InserisciTransazioneComponent implements OnInit {
     }
 
     aggiungiProdottoDto(idProdotto: number, qta: number) {
-        // console.log(form.value.idProdotto);
-        // console.log(form.value.quantitaProdotto);
-        console.log(idProdotto);
-        console.log(qta);
         this.prodottoPresenteInLista = false;
         let prodottoDto: ProdottoDto = {
             idProdotto: 0,
             quantita: 0
         }
-        // prodottoDto.idProdotto = form.value.idProdotto;
-        // if (form.value.quantitaProdotto != null && form.value.quantitaProdotto != undefined) {
-        //     prodottoDto.quantita = form.value.quantitaProdotto;
-        // }
-        // if (form.value.pesoProdotto != null && form.value.pesoProdotto != undefined) {
-        //     prodottoDto.quantita = form.value.pesoProdotto;
-        // }
         if (this.listaProdottiDto.length > 0) {
             for (let p of this.listaProdottiDto) {
                 if (p.idProdotto == idProdotto) {
@@ -139,11 +127,9 @@ export class InserisciTransazioneComponent implements OnInit {
             prodottoDto.quantita = qta;
             this.listaProdottiDto.push(prodottoDto);
         }
-        console.log(this.listaProdottiDto);
     }
 
     eliminaProdottoDto(id: number) {
-        console.log(id);
         let indice: number = 0;
         for (let pDto of this.listaProdottiDto) {
             if (id == pDto.idProdotto) {
@@ -155,7 +141,6 @@ export class InserisciTransazioneComponent implements OnInit {
 
     visualizzaListaProdotti() {
         this.prodServ.getAllProdotti().subscribe((risp) => {
-            console.log(risp);
             this.listaProdotti = risp;
         })
     }

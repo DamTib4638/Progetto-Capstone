@@ -78,9 +78,7 @@ export class InserisciScaricoComponent implements OnInit {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-                console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('MAGAZZINIERE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaFornitori();
@@ -95,28 +93,22 @@ export class InserisciScaricoComponent implements OnInit {
             this.newScarico.idFornitore = this.idFornitore;
             this.newScarico.idDipendente = this.dipendente.idDipendente;
             this.newScarico.dataPrenotazioneOrdine = new Date();
-            console.log(this.newScarico);
             this.scarServ.insertScarico(this.newScarico);
         }
     }
 
     scegliFornitore(form: NgForm) {
-        console.log(form.value.idFornitore);
         this.idFornitore = form.value.idFornitore;
         this.fornitore.idFornitore = form.value.idFornitore;
         this.fornitore.nomeDittaFornitore = form.value.nomeDittaFornitore;
     }
 
     aggiungiProdottoDto(idProdotto: number, qta: number) {
-        // console.log(form.value.idProdotto);
-        // console.log(form.value.quantitaProdotto);
         this.prodottoPresenteInLista = false;
         let prodottoDto: ProdottoDto = {
             idProdotto: 0,
             quantita: 0
         }
-        // prodottoDto.idProdotto = form.value.idProdotto;
-        // prodottoDto.quantita = form.value.quantitaProdotto;
         if (this.listaProdottiDto.length > 0) {
             for (let p of this.listaProdottiDto) {
                 if (p.idProdotto == idProdotto) {
@@ -130,12 +122,9 @@ export class InserisciScaricoComponent implements OnInit {
             prodottoDto.quantita = qta;
             this.listaProdottiDto.push(prodottoDto);
         }
-        // this.listaProdottiDto.push(prodottoDto);
-        console.log(this.listaProdottiDto);
     }
 
     eliminaProdottoDto(id: number) {
-        console.log(id);
         let indice: number = 0;
         for (let pDto of this.listaProdottiDto) {
             if (id == pDto.idProdotto) {
@@ -147,14 +136,12 @@ export class InserisciScaricoComponent implements OnInit {
 
     visualizzaListaProdotti() {
         this.prodServ.getAllProdotti().subscribe((risp) => {
-            console.log(risp);
             this.listaProdotti = risp;
         })
     }
 
     visualizzaListaFornitori() {
         this.scarServ.getAllFornitori().subscribe((risp) => {
-            console.log(risp);
             this.listaFornitori = risp;
         })
     }

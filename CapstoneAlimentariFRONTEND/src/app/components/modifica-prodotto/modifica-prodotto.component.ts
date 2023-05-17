@@ -67,22 +67,17 @@ export class ModificaProdottoComponent implements OnInit {
     ngOnInit(): void {
         this.authServ.isAuthenticated();
         this.emailCorrente = this.authServ.getEmailCorrente();
-        console.log(this.emailCorrente);
         if (this.emailCorrente != null) {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
-                console.log(this.dipendente);
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-                console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaScaffali();
                     let id: number = this.ar.snapshot.params['id'];
                     this.prodServ.getAllProdotti().subscribe((risp) => {
                         this.listaProdotti = risp;
-                        console.log(this.listaProdotti);
                         for (let pr of this.listaProdotti) {
                             if (Number(pr.idProdotto) == id) {
                                 this.prod = pr;
@@ -92,7 +87,6 @@ export class ModificaProdottoComponent implements OnInit {
                                 if (this.prod.pesoDisponibile != null && this.prod.qtaDisponibile == null && this.prod.pesoDisponibile > -1) {
                                     this.sceltaQtaPeso = 2;
                                 }
-                                console.log(this.prod.scaffale);
                                 this.scaf = this.prod.scaffale;
                             }
                         }
@@ -109,7 +103,6 @@ export class ModificaProdottoComponent implements OnInit {
     // }
 
     modifica(form: NgForm) {
-        console.log(this.ar.snapshot.params['id']);
         if (form.value.nome !== null) {
             this.prod.nome = form.value.nome;
             this.prod.marca = form.value.marca;
@@ -125,25 +118,14 @@ export class ModificaProdottoComponent implements OnInit {
             this.prod.percentualeOfferta = form.value.percentualeOfferta;
             // this.prodServ.getScaffaleById(form.value.idScaffale)
             this.prodServ.getScaffaleById(form.value.idScaffale).subscribe((risp) => {
-                console.log(risp);
                 this.prod.scaffale = risp;
-                console.log(this.prod.scaffale);
                 this.prodServ.editProdotto(this.prod);
             });
         }
     }
 
-    // getScaffale(id: number) {
-    //     this.prodServ.getScaffaleById(id).subscribe((risp) => {
-    //         console.log(risp);
-    //         this.scaf = risp;
-    //         console.log(this.scaf);
-    //     });
-    // }
-
     visualizzaListaScaffali() {
         this.prodServ.getAllScaffali().subscribe((risp) => {
-            console.log(risp);
             this.listaScaffali = risp;
         })
     }

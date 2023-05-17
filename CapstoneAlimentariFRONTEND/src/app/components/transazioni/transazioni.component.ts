@@ -56,7 +56,6 @@ export class TransazioniComponent implements OnInit {
             this.dipendente = ris;
             this.ruolo = this.dipendente.mansioni[0].tipoMansione;
             if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('CASSIERE'))) {
-                console.log(this.ruolo);
                 this.router.navigate(['/forbidden']);
             } else {
                 this.visualizzaListaTransazioni();

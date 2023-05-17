@@ -39,7 +39,6 @@ export class DettaglioProdottoComponent implements OnInit {
         let id: number = this.ar.snapshot.params['id'];
         this.prodServ.getAllProdotti().subscribe((risp) => {
             this.listaProdotti = risp;
-            console.log(this.listaProdotti);
             for (let pr of this.listaProdotti) {
                 if (Number(pr.idProdotto) == id) {
                     this.prod = pr;

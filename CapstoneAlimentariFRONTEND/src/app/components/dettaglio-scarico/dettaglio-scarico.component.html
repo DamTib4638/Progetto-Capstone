@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center">
     <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Scarico</h1>
-    <button class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
-    <div *ngIf="scarico" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
+    <button title="Torna a Lista Scarichi" class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
+    <div *ngIf="scarico.idScarico > 0" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
         <div class="card-header fw-bolder text-center bg-dark text-warning">
             Codice Scarico: {{scarico.idScarico}} -
             Fornitore: {{ scarico.fornitore.nomeDittaFornitore }} -

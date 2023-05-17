@@ -22,7 +22,7 @@
 </div>
 <div id="listaProdotti" class="row m-0 text-center">
     <div class="col-12 col-md-6 col-lg-3 card border-0 bg-transparent p-4 mb-5" *ngFor="let prod of listaProdotti">
-        <div class="carta card-body p-0 pb-3" [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]">
+        <div title="Clicca per Dettagli Prodotto" class="carta card-body p-0 pb-3" [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]">
             <img *ngIf="prod.tipoProdotto === 'FRUTTA' && prod.categoriaProdotto === 'FRUTTA_VERDURA'" src="../../../assets/images/frutta.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
             <img *ngIf="prod.tipoProdotto === 'VERDURA' && prod.categoriaProdotto === 'FRUTTA_VERDURA'" src="../../../assets/images/verdura.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
             <img *ngIf="prod.tipoProdotto === 'CARNE' && prod.categoriaProdotto === 'CARNE_PESCE'" src="../../../assets/images/carne.jpg" height="200rem" class="card-img-top mb-3 rounded-5 rounded-bottom" alt="#">
@@ -49,8 +49,8 @@
             <p class="card-text" *ngIf="prod.qtaDisponibile">{{prod.prezzoVenditaUnitario | currency: '€'}} / pezzo</p>
             <p class="card-text" *ngIf="prod.pesoDisponibile">{{prod.prezzoVenditaUnitario | currency: '€'}} / Kg</p>
             <!-- <input type="number" class="col-4" name="pezzi" id="pezzi"> -->
-            <button [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]" class="btn btn-info text-white col-4"><i class="bi bi-card-heading"></i></button>
-            <button *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" [routerLink]="['/modifica_prodotto/' + prod.idProdotto]" class="btn btn-warning text-dark col-4 offset-1"><i class="bi bi-pencil-square"></i></button>
+            <button title="Dettagli Prodotto" [routerLink]="['/dettaglio_prodotto/' + prod.idProdotto]" class="btn btn-info text-white col-4"><i class="bi bi-card-heading"></i></button>
+            <button title="Modifica Prodotto" *ngIf="authServ.isDipLoggedIn() && ruolo.includes('DIRETTORE')" [routerLink]="['/modifica_prodotto/' + prod.idProdotto]" class="btn btn-warning text-dark col-4 offset-1"><i class="bi bi-pencil-square"></i></button>
         </div>
     </div>
 </div>

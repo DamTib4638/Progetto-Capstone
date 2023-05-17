@@ -20,13 +20,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authServ.isAuthenticated();
     this.emailCorrente = this.authServ.getEmailCorrente();
-    console.log(this.emailCorrente);
     if (this.emailCorrente != null) {
         this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
             this.cognomeDipLoggato = ris.cognome;
             this.nomeDipLoggato = ris.nome;
             this.mansioni = ris.mansioni[0].tipoMansione;
-            console.log(this.mansioni);
         })
     }
   }

@@ -12,7 +12,7 @@ export class ProdottoService {
 
     baseUrlProdotti: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/prodotti";
     baseUrlScaffali: string = "https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/scaffali";
-    dipInTurno = localStorage.getItem("dipendenteCorrente");
+    dipInTurno = sessionStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
     accesso: HttpHeaders = new HttpHeaders({
         'Authorization': 'Bearer '+this.dipInTurnoParse.accessToken
@@ -21,7 +21,6 @@ export class ProdottoService {
     constructor(private http: HttpClient, private router: Router) { }
 
     getAllProdotti() {
-        console.log(this.dipInTurnoParse.accessToken);
         return this.http.get<Prodotto[]>(this.baseUrlProdotti, {headers: this.accesso}).pipe(
             catchError((err) => {
                 return throwError(this.getMessaggioErrore(err.stato));

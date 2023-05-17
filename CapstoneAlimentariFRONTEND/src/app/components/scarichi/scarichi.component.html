@@ -21,13 +21,13 @@
             <div class="col-2 d-none d-lg-block">
                 <h6>DATA REGISTRAZIONE</h6>
             </div>
-            <div class="col-2 d-none d-lg-block">
+            <div class="col-1 d-none d-lg-block">
                 <h6>FORNITORE</h6>
             </div>
             <div class="col-5 col-lg-3">
                 <h6>DIPENDENTE</h6>
             </div>
-            <div class="col-6 col-lg-2">
+            <div class="col-6 col-lg-3">
                 <h6>AZIONI</h6>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-2 d-none d-lg-block" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
                 <h6>{{scar.dataRegScar}}</h6>
             </div>
-            <div class="col-2 d-none d-lg-block" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+            <div class="col-1 d-none d-lg-block" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
                 <h6>{{scar.fornitore.nomeDittaFornitore}}</h6>
             </div>
             <div class="col-5 col-lg-3" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
@@ -63,7 +63,7 @@
                     {{scar.dipendente.nome}} - MANAGER</h6>
             </div>
             <div *ngIf="(!confermaCanc && !confermaReg) || (codiceVerificaCanc != scar.idScarico && codiceVerificaReg != scar.idScarico)"
-                class="col-6 col-lg-2" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
+                class="col-6 col-lg-3" [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
                 <button id="btn_01" title="Dettaglio Scarico" class="btn btn-info"
                     [routerLink]="['/dettaglio_scarico/' + scar.idScarico]">
                     <i class="bi bi-arrows-fullscreen"></i>
@@ -77,16 +77,16 @@
                     <i class="bi bi-trash3"></i>
                 </button>
             </div>
-            <div *ngIf="confermaCanc && (codiceVerificaCanc == scar.idScarico)" class="col-2">
-                <button title="Conferma eliminazione" class="btn btn-success me-2"
+            <div *ngIf="confermaCanc && (codiceVerificaCanc == scar.idScarico)" class="col-6 col-lg-3">
+                <button title="Conferma eliminazione" class="btn btn-success me-0 me-md-2"
                     (click)="confermaCancellazione(scar.idScarico)">Cancella</button>
-                <button title="Annulla eliminazione" class="btn btn-danger"
+                <button title="Annulla eliminazione" class="btn btn-danger ms-1 ms-md-0"
                     (click)="annullaCancellazione()">Annulla</button>
             </div>
-            <div *ngIf="confermaReg && (codiceVerificaReg == scar.idScarico)" class="col-2">
-                <button title="Conferma registrazione" class="btn btn-success me-2"
+            <div *ngIf="confermaReg && (codiceVerificaReg == scar.idScarico)" class="col-6 col-lg-3">
+                <button title="Conferma registrazione" class="btn btn-success me-0 me-md-2"
                     (click)="confermaRegistrazione(scar.idScarico)">Registra</button>
-                <button title="Annulla registrazione" class="btn btn-danger"
+                <button title="Annulla registrazione" class="btn btn-danger ms-1 ms-md-0"
                     (click)="annullaRegistrazione()">Annulla</button>
             </div>
         </div>

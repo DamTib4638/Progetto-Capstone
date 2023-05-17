@@ -75,19 +75,14 @@ export class DettaglioTransazioneComponent implements OnInit {
     ngOnInit(): void {
         this.authServ.isAuthenticated();
         this.emailCorrente = this.authServ.getEmailCorrente();
-        console.log(this.emailCorrente);
         if (this.emailCorrente != null) {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
-                console.log(this.dipendente);
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-                console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('CASSIERE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     let id: number = this.ar.snapshot.params['id'];
-                    console.log(id);
                     this.tranServ.getAllTransazioni().subscribe((risp) => {
                         this.listaTransazioni = risp;
                         for (let tr of this.listaTransazioni) {

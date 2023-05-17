@@ -53,17 +53,16 @@ export class ProdottiComponent implements OnInit {
 
   visualizzaListaProdotti() {
     this.prodServ.getAllProdotti().subscribe((response) => {
-        console.log(response);
         this.listaProdotti = response;
     })
   }
 
   cercaProd() {
-    console.log(this.testo);
+    // console.log(this.testo);
   }
 
   visualizzaProdottiPerCategoria(categoria: string) {
-    console.log(categoria);
+    // console.log(categoria);
   }
 
   nuovoProdotto() {

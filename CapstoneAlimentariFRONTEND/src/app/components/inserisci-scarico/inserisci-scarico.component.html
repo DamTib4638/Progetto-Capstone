@@ -13,7 +13,7 @@
                     *ngIf="idFornitore.invalid && (idFornitore.dirty || idFornitore.touched)">
                     Il Fornitore a cui assegnare il nuovo Scarico merci è OBBLIGATORIO
                 </span>
-                <button type="submit" class="btn btn-info text-white" [disabled]="fornitoreScelto.invalid">Scegli
+                <button title="Clicca per confermare la scelta del Fornitore" type="submit" class="btn btn-info text-white" [disabled]="fornitoreScelto.invalid">Scegli
                     Fornitore</button>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <span *ngFor="let prod of listaProdotti">
                     <input class="me-5 text-center w-25" *ngIf="idProdotto.value == prod.idProdotto" type="number" name="quantitaProdotto"
                     id="quantitaProdotto" [(ngModel)]=quantitaProdotto required min="1">
-                    <button *ngIf="idProdotto.value == prod.idProdotto" type="submit" class="btn btn-info text-white" [disabled]="newScarico.invalid" (click)="aggiungiProdottoDto(prod.idProdotto, quantitaProdotto)">Aggiungi
+                    <button title="Clicca per aggiungere il Prodotto al rifornimento" *ngIf="idProdotto.value == prod.idProdotto" type="submit" class="btn btn-info text-white" [disabled]="newScarico.invalid" (click)="aggiungiProdottoDto(prod.idProdotto, quantitaProdotto)">Aggiungi
                         Prodotto</button>
                 </span>
             </div>
@@ -44,7 +44,7 @@
     <div class="row">
         <div *ngFor="let prDto of listaProdottiDto" class="col-md-6 offset-md-3 d-flex justify-content-between align-items-center mb-3">
             <label class="me-5">ID: {{prDto.idProdotto}} - QUANTITà: {{prDto.quantita}}</label>
-            <button class="btn btn-danger me-3 text-white" (click)="eliminaProdottoDto(prDto.idProdotto)">Elimina</button>
+            <button title="Elimina questo Prodotto dal rifornimento" class="btn btn-danger me-3 text-white" (click)="eliminaProdottoDto(prDto.idProdotto)">Elimina</button>
         </div>
         <span class="text-info bg-transparent d-block text-center pb-4"
             *ngIf="idProdotto.invalid && (idProdotto.dirty || idProdotto.touched) && listaProdottiDto.length < 1">
@@ -53,8 +53,8 @@
     </div>
     <div class="row py-3 border border-start-0 border-end-0 border-bottom-0">
         <div class="d-flex justify-content-center mt-3">
-            <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
-            <button class="btn btn-info text-white" (click)="insert()"
+            <button title="Torna a Lista Scarichi" class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
+            <button title="Esegui Invio Prenotazione Scarico" class="btn btn-info text-white" (click)="insert()"
                 [disabled]="newScarico.invalid || fornitoreScelto.invalid || listaProdottiDto.length < 1 || fornitore.idFornitore < 1 || fornitore.idFornitore!=fornitoreScelto.value.idFornitore">Invia Prenotazione Scarico
             </button>
         </div>

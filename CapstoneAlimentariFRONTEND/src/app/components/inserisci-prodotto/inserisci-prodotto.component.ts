@@ -66,15 +66,11 @@ export class InserisciProdottoComponent implements OnInit {
     ngOnInit(): void {
         this.authServ.isAuthenticated();
         this.emailCorrente = this.authServ.getEmailCorrente();
-        console.log(this.emailCorrente);
         if (this.emailCorrente != null) {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
-                console.log(this.dipendente);
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-                console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaScaffali();
@@ -97,29 +93,21 @@ export class InserisciProdottoComponent implements OnInit {
             this.newProd.prezzoAcquistoUnitario = form.value.prezzoAcquistoUnitario;
             this.newProd.prezzoVenditaUnitario = form.value.prezzoVenditaUnitario;
             this.newProd.percentualeOfferta = form.value.percentualeOfferta;
-            // this.prodServ.getScaffaleById(form.value.idScaffale)
             this.prodServ.getScaffaleById(form.value.idScaffale).subscribe((risp) => {
-                console.log(risp);
                 this.newProd.scaffale = risp;
-                console.log(this.newProd.scaffale);
                 this.prodServ.insertProdotto(this.newProd);
             });
-            console.log(form.value.idScaffale);
-            console.log(this.newProd);
         }
     }
 
     getScaffale(id: number) {
         this.prodServ.getScaffaleById(id).subscribe((risp) => {
-            console.log(risp);
             this.scaf = risp;
-            console.log(this.scaf);
         });
     }
 
     visualizzaListaScaffali() {
         this.prodServ.getAllScaffali().subscribe((risp) => {
-            console.log(risp);
             this.listaScaffali = risp;
         })
     }

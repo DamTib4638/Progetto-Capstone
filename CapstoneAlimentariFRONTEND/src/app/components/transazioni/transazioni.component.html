@@ -19,13 +19,13 @@
             <div class="col-2 d-none d-lg-block">
                 <h6>DATA PAGAMENTO</h6>
             </div>
-            <div class="col-2 d-none d-lg-block">
+            <div class="col-1 d-none d-lg-block">
                 <h6>CASSA</h6>
             </div>
             <div class="col-5 col-lg-3">
                 <h6>DIPENDENTE</h6>
             </div>
-            <div class="col-6 col-lg-2">
+            <div class="col-6 col-lg-3">
                 <h6>AZIONI</h6>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <div class="col-2 d-none d-lg-block" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
                 <h6>{{tran.dataPagamentoTransazione}}</h6>
             </div>
-            <div class="col-2 d-none d-lg-block" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+            <div class="col-1 d-none d-lg-block" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
                 <h6>{{tran.cassa.numeroCassa}}</h6>
             </div>
             <div class="col-5 col-lg-3" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
@@ -61,7 +61,7 @@
                     {{tran.dipendente.nome}} - MANAGER</h6>
             </div>
             <div *ngIf="(!confermaCanc && !confermaPagam) || (codiceVerificaCanc != tran.idTransazione && codiceVerificaPagam != tran.idTransazione)"
-                class="col-6 col-lg-2" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
+                class="col-6 col-lg-3" [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
                 <button id="btn_01" title="Dettaglio Transazione" class="btn btn-info"
                     [routerLink]="['/dettaglio_transazione/' + tran.idTransazione]">
                     <i class="bi bi-arrows-fullscreen"></i>
@@ -75,16 +75,16 @@
                     <i class="bi bi-trash3"></i>
                 </button>
             </div>
-            <div *ngIf="confermaCanc && (codiceVerificaCanc == tran.idTransazione)" class="col-2">
-                <button title="Conferma eliminazione" class="btn btn-success me-2"
+            <div *ngIf="confermaCanc && (codiceVerificaCanc == tran.idTransazione)" class="col-6 col-lg-3">
+                <button title="Conferma eliminazione" class="btn btn-success me-0 me-md-2"
                     (click)="confermaCancellazione(tran.idTransazione)">Cancella</button>
-                <button title="Annulla eliminazione" class="btn btn-danger"
+                <button title="Annulla eliminazione" class="btn btn-danger ms-1 ms-md-0"
                     (click)="annullaCancellazione()">Annulla</button>
             </div>
-            <div *ngIf="confermaPagam && (codiceVerificaPagam == tran.idTransazione)" class="col-2">
-                <button title="Conferma pagamento" class="btn btn-success me-2"
+            <div *ngIf="confermaPagam && (codiceVerificaPagam == tran.idTransazione)" class="col-6 col-lg-3">
+                <button title="Conferma pagamento" class="btn btn-success me-0 me-md-2"
                     (click)="confermaPagamento(tran.idTransazione)">Paga</button>
-                <button title="Annulla pagamento" class="btn btn-danger" (click)="annullaPagamento()">Annulla</button>
+                <button title="Annulla pagamento" class="btn btn-danger ms-1 ms-md-0" (click)="annullaPagamento()">Annulla</button>
             </div>
         </div>
     </div>

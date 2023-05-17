@@ -43,9 +43,7 @@ export class DipendentiComponent implements OnInit {
         this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
             this.dipendente = ris;
             this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-            console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     this.visualizzaListaDipendenti();
@@ -56,7 +54,6 @@ export class DipendentiComponent implements OnInit {
 
   visualizzaListaDipendenti() {
     this.dipServ.getAllDipendenti().subscribe((response) => {
-        console.log(response);
         this.listaDipendenti = response;
     })
   }

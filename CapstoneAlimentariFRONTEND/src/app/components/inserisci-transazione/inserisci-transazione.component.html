@@ -14,8 +14,7 @@
                     class="text-info bg-transparent d-block pb-3">
                     La Cassa da cui emettere la transazione è OBBLIGATORIA
                 </span>
-                <button type="submit" class="btn btn-info text-white" [disabled]="cassaScelta.invalid">Scegli
-                    Cassa</button>
+                <button title="Clicca per confermare la scelta della Cassa" type="submit" class="btn btn-info text-white" [disabled]="cassaScelta.invalid">Scegli Cassa</button>
             </div>
         </div>
         <div *ngIf="cassaScelta.valid && cassa.idCassa==cassaScelta.value.idCassa && cassa.idCassa>0" class="d-flex justify-content-center pb-3 align-items-center">
@@ -36,7 +35,7 @@
                     <input class="me-5 text-center w-25" *ngIf="idProdotto.value == prod.idProdotto && prod.qtaDisponibile != null" type="number" name="quantitaProdotto" id="quantitaProdotto" [(ngModel)]=quantitaProdotto required min="1" max="{{prod.qtaDisponibile}}">
                     <input class="me-5 text-center" *ngIf="idProdotto.value == prod.idProdotto && prod.pesoDisponibile != null" type="number" name="quantitaProdotto" id="quantitaProdotto" [(ngModel)]=quantitaProdotto required min="1" max="{{prod.pesoDisponibile}}">
 
-                    <button *ngIf="idProdotto.value == prod.idProdotto && (prod.qtaDisponibile != null || prod.pesoDisponibile != null)" type="submit" class="btn btn-info text-white" [disabled]="newTransazione.invalid" (click)="aggiungiProdottoDto(prod.idProdotto, quantitaProdotto)">Aggiungi
+                    <button title="Clicca per aggiungere il Prodotto alla transazione" *ngIf="idProdotto.value == prod.idProdotto && (prod.qtaDisponibile != null || prod.pesoDisponibile != null)" type="submit" class="btn btn-info text-white" [disabled]="newTransazione.invalid" (click)="aggiungiProdottoDto(prod.idProdotto, quantitaProdotto)">Aggiungi
                         Prodotto</button>
                 </span>
             </div>
@@ -45,7 +44,7 @@
     <div class="row">
         <div *ngFor="let prDto of listaProdottiDto" class="col-md-6 offset-md-3 d-flex justify-content-between align-items-center mb-3">
             <label class="me-5">ID: {{prDto.idProdotto}} - QUANTITà: {{prDto.quantita}}</label>
-            <button class="btn btn-danger me-3 text-white" (click)="eliminaProdottoDto(prDto.idProdotto)">Elimina</button>
+            <button title="Elimina questo Prodotto dalla transazione" class="btn btn-danger me-3 text-white" (click)="eliminaProdottoDto(prDto.idProdotto)">Elimina</button>
         </div>
         <span class="text-info bg-transparent d-block text-center pb-4"
             *ngIf="idProdotto.invalid && (idProdotto.dirty || idProdotto.touched) && listaProdottiDto.length < 1">
@@ -54,8 +53,8 @@
     </div>
     <div class="row py-3 border border-start-0 border-end-0 border-bottom-0">
         <div class="d-flex justify-content-center mt-3">
-            <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
-            <button class="btn btn-info text-white" (click)="insert()"
+            <button title="Torna a Lista Transazioni" class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
+            <button title="Esegui Invio Nuova Transazione" class="btn btn-info text-white" (click)="insert()"
                 [disabled]="newTransazione.invalid || cassaScelta.invalid || listaProdottiDto.length < 1 || cassa.idCassa < 1 || cassa.idCassa!=cassaScelta.value.idCassa">Invia Nuova Transazione
             </button>
         </div>

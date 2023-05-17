@@ -1,17 +1,25 @@
 <div class="d-flex flex-column align-items-center">
-        <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Prodotto</h1>
-        <button class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start" (click)="tornaIndietro()">Back</button>
-        <div *ngIf="prod" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
-            <div class="card-header fw-bolder text-center bg-dark text-warning">Codice Prodotto {{ prod.idProdotto}}</div>
-            <div class="card-body">
-                <h4 class="card-text text-center coloriMenu">Nome prodotto: {{ prod.nome }} - Marca: {{ prod.marca }}</h4>
-                <p class="card-text text-center"><i class="fw-bold">Descrizione: {{ prod.descrizione }}</i></p>
-                <p class="card-text text-center"><i class="fw-bold">Ingredienti: {{ prod.ingredienti }}</i></p>
-                <p class="card-text text-center">Categoria Prodotto: {{ prod.categoriaProdotto }}. Tipo Prodotto: {{ prod.tipoProdotto }}</p>
-                <h6 class="card-text text-center" *ngIf="prod.qtaDisponibile">Data di Scadenza: {{ prod.dataScadenza | date:'dd/MM/yyyy' }} - Pezzi Disponibili: {{ prod.qtaDisponibile }}</h6>
-                <h6 class="card-text text-center" *ngIf="prod.pesoDisponibile">Data di Scadenza: {{ prod.dataScadenza | date:'dd/MM/yyyy' }} - Chilogrammi Disponibili: {{ prod.pesoDisponibile }}</h6>
-                <p class="card-text text-center" *ngIf="prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{ prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: SI. Percentuale sconto: {{ prod.percentualeOfferta }} - Prezzo Vendita al Pubblico: {{ prod.prezzoVenditaUnitario }}</p>
-                <p class="card-text text-center" *ngIf="!prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{ prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: NO - Prezzo Vendita al Pubblico: {{ prod.prezzoVenditaUnitario }}</p>
-            </div>
+    <h1 class="text-center mt-2" id="titolo_edit">Dettaglio Prodotto</h1>
+    <button title="Torna a Lista Prodotti" class="btn btn-info text-white ms-lg-5 ms-auto me-auto mt-2 align-self-start"
+        (click)="tornaIndietro()">Back</button>
+    <div *ngIf="prod" class="card col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 m-3 contenitore_card">
+        <div class="card-header fw-bolder text-center bg-dark text-warning">Codice Prodotto {{ prod.idProdotto}}</div>
+        <div class="card-body">
+            <h4 class="card-text text-center coloriMenu">Nome prodotto: {{ prod.nome }} - Marca: {{ prod.marca }}</h4>
+            <p class="card-text text-center"><i class="fw-bold">Descrizione: {{ prod.descrizione }}</i></p>
+            <p class="card-text text-center"><i class="fw-bold">Ingredienti: {{ prod.ingredienti }}</i></p>
+            <p class="card-text text-center">Categoria Prodotto: {{ prod.categoriaProdotto }}. Tipo Prodotto: {{
+                prod.tipoProdotto }}</p>
+            <h6 class="card-text text-center" *ngIf="prod.qtaDisponibile">Data di Scadenza: {{ prod.dataScadenza |
+                date:'dd/MM/yyyy' }} - Pezzi Disponibili: {{ prod.qtaDisponibile }}</h6>
+            <h6 class="card-text text-center" *ngIf="prod.pesoDisponibile">Data di Scadenza: {{ prod.dataScadenza |
+                date:'dd/MM/yyyy' }} - Chilogrammi Disponibili: {{ prod.pesoDisponibile }}</h6>
+            <p class="card-text text-center" *ngIf="prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{
+                prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: SI. Percentuale sconto: {{ prod.percentualeOfferta
+                }} - Prezzo Vendita al Pubblico: {{ prod.prezzoVenditaUnitario }}</p>
+            <p class="card-text text-center" *ngIf="!prod.percentualeOfferta">Prezzo Acquisto dal Fornitore: {{
+                prod.prezzoAcquistoUnitario }} - Prodotto in Offerta: NO - Prezzo Vendita al Pubblico: {{
+                prod.prezzoVenditaUnitario }}</p>
         </div>
+    </div>
 </div>

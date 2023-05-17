@@ -79,34 +79,24 @@ export class DettaglioScaricoComponent implements OnInit {
     ngOnInit(): void {
         this.authServ.isAuthenticated();
         this.emailCorrente = this.authServ.getEmailCorrente();
-        console.log(this.emailCorrente);
         if (this.emailCorrente != null) {
             this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
                 this.dipendente = ris;
-                console.log(this.dipendente);
                 this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-                console.log(this.ruolo);
                 if (!(this.ruolo.includes('DIRETTORE')) && !(this.ruolo.includes('MAGAZZINIERE'))) {
-                    console.log(this.ruolo);
                     this.router.navigate(['/forbidden']);
                 } else {
                     let id: number = this.ar.snapshot.params['id'];
                     this.scarServ.getAllScarichi().subscribe((risp) => {
                         this.listaScarichi = risp;
-                        console.log(this.listaScarichi);
                         for (let sc of this.listaScarichi) {
                             if (Number(sc.idScarico) == id) {
                                 this.scarico = sc;
-                                console.log(this.scarico.fornitore.idFornitore);
                                 this.scarServ.getFornitoreById(this.scarico.fornitore.idFornitore).subscribe((risp) => {
-                                    console.log(risp);
                                     this.fornitore = risp;
                                 })
-                                console.log(this.scarico.idScarico);
                                 this.scarServ.getDettagliScarichiByIdScarico(this.scarico.idScarico).subscribe((risp) => {
-                                    console.log(risp);
                                     this.listaDettagliScarico = risp;
-
                                 })
                             }
                         }

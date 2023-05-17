@@ -16,7 +16,7 @@ export class TransazioneService {
     baseUrlCassa: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/casse';
     baseUrlDettaglioTransazione: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dettaglioTransazioni';
 
-    dipInTurno = localStorage.getItem("dipendenteCorrente");
+    dipInTurno = sessionStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
     accesso: HttpHeaders = new HttpHeaders({
         'Authorization': 'Bearer '+this.dipInTurnoParse.accessToken
@@ -94,7 +94,8 @@ export class TransazioneService {
     }
 
     indietro() {
-        window.location.href = 'transazioni';
+        // window.location.href = 'transazioni';
+        this.router.navigate(['/transazioni']);
     }
 
 }

@@ -183,8 +183,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-2">
-            <button class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
-            <button class="btn btn-info text-white" type="submit" [disabled]="newProdotto.invalid || sceltaQtaPeso < 1">Inserisci Prodotto</button>
+            <button title="Torna a Lista Prodotti" class="btn btn-info me-3 text-white" (click)="tornaIndietro()">Back</button>
+            <button title="Esegui Inserimento Prodotto" class="btn btn-info text-white" type="submit" [disabled]="newProdotto.invalid || sceltaQtaPeso < 1">Inserisci Prodotto</button>
         </div>
     </form>
 </div>

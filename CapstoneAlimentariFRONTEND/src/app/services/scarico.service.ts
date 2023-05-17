@@ -16,7 +16,7 @@ export class ScaricoService {
     baseUrlFornitore: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/fornitori';
     baseUrlDettaglioScarico: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/dettaglioScarichi'
 
-    dipInTurno = localStorage.getItem("dipendenteCorrente");
+    dipInTurno = sessionStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
     accesso: HttpHeaders = new HttpHeaders({
         'Authorization': 'Bearer '+this.dipInTurnoParse.accessToken
@@ -25,21 +25,18 @@ export class ScaricoService {
   constructor(private http: HttpClient, private router: Router) { }
 
     insertScarico(ord: Ordinazione) {
-        console.log(ord);
         return this.http.post<Scarico>(this.baseUrlScarico, ord, {headers: this.accesso}).subscribe(() => {
             this.indietro();
         })
     }
 
     registraScarico(s: Scarico) {
-        console.log(s);
         return this.http.put<Scarico>(this.baseUrlScarico + '/gestione/' + s.idScarico, s, {headers: this.accesso}).subscribe(() => {
             window.location.reload();
         })
     }
 
     eliminaScarico(s: Scarico) {
-        console.log(s);
         return this.http.delete<Boolean>(this.baseUrlScarico + '/gestione/' + s.idScarico, {headers: this.accesso}).subscribe(() => {
             window.location.reload();
         })
@@ -97,8 +94,8 @@ export class ScaricoService {
     }
 
     indietro() {
-        window.location.href = 'scarichi';
-        // this.router.navigate(['/scarichi']);
+        // window.location.href = 'scarichi';
+        this.router.navigate(['/scarichi']);
     }
 
 }

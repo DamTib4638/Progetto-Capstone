@@ -15,7 +15,7 @@ export class DipendenteService {
     registerUrl: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/auth/alimentari/register';
     baseUrlContratti: string = 'https://alimentaribe.osc-fr1.scalingo.io/api/alimentari/contratti';
 
-    dipInTurno = localStorage.getItem("dipendenteCorrente");
+    dipInTurno = sessionStorage.getItem("dipendenteCorrente");
     dipInTurnoParse = this.dipInTurno ? JSON.parse(this.dipInTurno) : '';
     accesso: HttpHeaders = new HttpHeaders({
         'Authorization': 'Bearer '+this.dipInTurnoParse.accessToken
@@ -79,8 +79,8 @@ export class DipendenteService {
     }
 
     indietro() {
-        window.location.href = 'dipendenti';
-        // this.router.navigate(['/welcome']);
+        // window.location.href = 'dipendenti';
+        this.router.navigate(['/dipendenti']);
     }
 
 }

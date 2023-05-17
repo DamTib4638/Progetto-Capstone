@@ -53,15 +53,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.authServ.isAuthenticated();
     this.emailCorrente = this.authServ.getEmailCorrente();
-    console.log(this.emailCorrente);
     if (this.emailCorrente != null) {
         this.dipServ.getDipendenteByEmail(this.emailCorrente).subscribe((ris) => {
             this.dipendente = ris;
-            console.log(this.dipendente);
             this.ruolo = this.dipendente.mansioni[0].tipoMansione;
-            console.log(this.ruolo);
             if (!(this.ruolo.includes('DIRETTORE'))) {
-                console.log(this.ruolo);
                 this.router.navigate(['/forbidden']);
             }
         })
@@ -71,7 +67,6 @@ export class RegisterComponent implements OnInit {
 
   visualizzaListaContratti() {
     this.dipServ.getAllContratti().subscribe((risp) => {
-        console.log(risp);
         this.listaContratti = risp;
     })
   }

@@ -19,7 +19,7 @@ export class AuthJwtService {
     public authStatus$ = this.authStatusSource.asObservable();
 
     private httpOptions: HttpHeaders = new HttpHeaders({
-        'Authorization': 'Bearer' + localStorage.getItem("token")
+        'Authorization': 'Bearer' + sessionStorage.getItem("token")
     });
 
     private baseUrl: string = "https://alimentaribe.osc-fr1.scalingo.io/api/auth/alimentari";
@@ -28,7 +28,7 @@ export class AuthJwtService {
     isLoggedIn: boolean = false;
 
     constructor(private http: HttpClient, private router: Router) {
-        const storedDip = localStorage.getItem("dipendenteCorrente");
+        const storedDip = sessionStorage.getItem("dipendenteCorrente");
         this.dipendenteCorrenteSubject = new BehaviorSubject<DipendenteLoggato | null>(
             storedDip ? JSON.parse(storedDip) : null
         );
@@ -51,7 +51,7 @@ export class AuthJwtService {
     login(data: LoginDto): Observable<DipendenteLoggato> {
         return this.http.post<DipendenteLoggato>(this.baseUrl + '/login', data).pipe(
             map((dip) => {
-                localStorage.setItem("dipendenteCorrente", JSON.stringify(dip));
+                sessionStorage.setItem("dipendenteCorrente", JSON.stringify(dip));
                 this.dipendenteCorrenteSubject.next(dip);
                 this.updateAuthStatus(true);
                 this.isDipLoggedIn();
@@ -65,7 +65,7 @@ export class AuthJwtService {
     }
 
     getEmailCorrente() {
-        let dipInTurno = localStorage.getItem("dipendenteCorrente");
+        let dipInTurno = sessionStorage.getItem("dipendenteCorrente");
         let dipInTurnoParse = dipInTurno ? JSON.parse(dipInTurno) : null;
         if (dipInTurnoParse != null) {
             return dipInTurnoParse.email;
@@ -73,69 +73,31 @@ export class AuthJwtService {
     }
 
     getToken() {
-        const token = JSON.parse(localStorage.getItem("dipendenteCorrente")!);
+        const token = JSON.parse(sessionStorage.getItem("dipendenteCorrente")!);
         return token.accessToken;
     }
 
     logout(): void {
-        localStorage.removeItem("dipendenteCorrente");
+        sessionStorage.removeItem("dipendenteCorrente");
         this.dipendenteCorrenteSubject.next(null);
         this.updateAuthStatus(false);
         this.isLoggedIn = false;
     }
 
     isAuthenticated() {
-        const storedDip = localStorage.getItem("dipendenteCorrente");
-        console.log(storedDip);
+        const storedDip = sessionStorage.getItem("dipendenteCorrente");
         if (!storedDip) {
             this.router.navigate(['/login']);
         }
     }
 
     isDipLoggedIn() {
-        let dip = localStorage.getItem("dipendenteCorrente")
-        // console.log(dip);
+        let dip = sessionStorage.getItem("dipendenteCorrente")
         if (dip != null) {
             return true;
         }
         return false;
     }
-
-    // getDipendenteByEmail() {
-    //     if (localStorage.getItem("dipendenteCorrente") != null) {
-    //         let dipInTurno = localStorage.getItem("dipendenteCorrente");
-    //         let dipInTurnoParse = dipInTurno ? JSON.parse(dipInTurno) : '';
-    //         return this.http.get<Dipendente>(this.baseUrlDip + '/' +dipInTurnoParse.email).pipe(
-    //             catchError((err) => {
-    //                 return throwError(this.getMessaggioErrore(err.stato));
-    //             })
-    //         );
-    //         // if (dipInTurnoParse.email.includes('direttore')) {
-    //         //     return 'Damiano Tiberi'
-    //         // } else if (dipInTurnoParse.email.includes('cassiere')) {
-    //         //     return 'Stefano Gavioli'
-    //         // } else if (dipInTurnoParse.email.includes('banco')) {
-    //         //     return 'Manuel Ferrucci'
-    //         // } else if (dipInTurnoParse.email.includes('scaffale')) {
-    //         //     return 'Francesco Pastore'
-    //         // } else {
-    //         //     return 'Stefano Violi'
-    //         // }
-    //     }
-    //     let dipendente: Dipendente = {
-    //         nome: '',
-    //         cognome: '',
-    //         eta: 0,
-    //         codFis: '',
-    //         telefono: '',
-    //         indirizzo: '',
-    //         citta: '',
-    //         email: '',
-    //         token: '',
-    //         mansioni: []
-    //     }
-    //     return dipendente;
-    // }
 
     getMessaggioErrore(stato: number) {
         let messaggio: string = '';
